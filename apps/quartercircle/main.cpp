@@ -1,5 +1,5 @@
-#include "rng.h"
 #include "io.h"
+#include "quartercircle_pi.h"
 #include <iostream>
 #include <cstdint>
 #include <string>
@@ -10,23 +10,12 @@ int main(int argc, char** argv) {
     std::uint64_t numSamples = input.samples;
     std::uint64_t seed = input.seed;
 
-    Random rng(seed);
-    std::uint64_t inside = 0;
-
     // Start timing the computation
     Timer timer;
     timer.start();
 
-    for (std::uint64_t i = 0; i < numSamples; ++i) {
-        double x = rng.uniform01();
-        double y = rng.uniform01();
-        if (x * x + y * y <= 1.0) {
-            ++inside;
-        }
-    }
-
-    // Calculate results
-    double piEstimate = 4.0 * static_cast<double>(inside) / static_cast<double>(numSamples);
+    // Run the quarter circle simulation
+    double piEstimate = runQuarterCircleSimulation(numSamples, seed);
     
     // Stop timing after all computation is complete
     timer.stop();

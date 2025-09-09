@@ -1,6 +1,10 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/core.dir/src/buffon_pi.cpp.o"
+  "CMakeFiles/core.dir/src/buffon_pi.cpp.o.d"
   "CMakeFiles/core.dir/src/io.cpp.o"
   "CMakeFiles/core.dir/src/io.cpp.o.d"
+  "CMakeFiles/core.dir/src/quartercircle_pi.cpp.o"
+  "CMakeFiles/core.dir/src/quartercircle_pi.cpp.o.d"
   "CMakeFiles/core.dir/src/rng.cpp.o"
   "CMakeFiles/core.dir/src/rng.cpp.o.d"
   "libcore.a"

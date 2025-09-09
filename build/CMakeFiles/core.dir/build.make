@@ -100,19 +100,51 @@ CMakeFiles/core.dir/src/io.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/core.dir/src/io.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/julian/MonteCarloTransport/src/io.cpp -o CMakeFiles/core.dir/src/io.cpp.s
 
+CMakeFiles/core.dir/src/quartercircle_pi.cpp.o: CMakeFiles/core.dir/flags.make
+CMakeFiles/core.dir/src/quartercircle_pi.cpp.o: /home/julian/MonteCarloTransport/src/quartercircle_pi.cpp
+CMakeFiles/core.dir/src/quartercircle_pi.cpp.o: CMakeFiles/core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/julian/MonteCarloTransport/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/core.dir/src/quartercircle_pi.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/core.dir/src/quartercircle_pi.cpp.o -MF CMakeFiles/core.dir/src/quartercircle_pi.cpp.o.d -o CMakeFiles/core.dir/src/quartercircle_pi.cpp.o -c /home/julian/MonteCarloTransport/src/quartercircle_pi.cpp
+
+CMakeFiles/core.dir/src/quartercircle_pi.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/core.dir/src/quartercircle_pi.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/julian/MonteCarloTransport/src/quartercircle_pi.cpp > CMakeFiles/core.dir/src/quartercircle_pi.cpp.i
+
+CMakeFiles/core.dir/src/quartercircle_pi.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/core.dir/src/quartercircle_pi.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/julian/MonteCarloTransport/src/quartercircle_pi.cpp -o CMakeFiles/core.dir/src/quartercircle_pi.cpp.s
+
+CMakeFiles/core.dir/src/buffon_pi.cpp.o: CMakeFiles/core.dir/flags.make
+CMakeFiles/core.dir/src/buffon_pi.cpp.o: /home/julian/MonteCarloTransport/src/buffon_pi.cpp
+CMakeFiles/core.dir/src/buffon_pi.cpp.o: CMakeFiles/core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/julian/MonteCarloTransport/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/core.dir/src/buffon_pi.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/core.dir/src/buffon_pi.cpp.o -MF CMakeFiles/core.dir/src/buffon_pi.cpp.o.d -o CMakeFiles/core.dir/src/buffon_pi.cpp.o -c /home/julian/MonteCarloTransport/src/buffon_pi.cpp
+
+CMakeFiles/core.dir/src/buffon_pi.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/core.dir/src/buffon_pi.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/julian/MonteCarloTransport/src/buffon_pi.cpp > CMakeFiles/core.dir/src/buffon_pi.cpp.i
+
+CMakeFiles/core.dir/src/buffon_pi.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/core.dir/src/buffon_pi.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/julian/MonteCarloTransport/src/buffon_pi.cpp -o CMakeFiles/core.dir/src/buffon_pi.cpp.s
+
 # Object files for target core
 core_OBJECTS = \
 "CMakeFiles/core.dir/src/rng.cpp.o" \
-"CMakeFiles/core.dir/src/io.cpp.o"
+"CMakeFiles/core.dir/src/io.cpp.o" \
+"CMakeFiles/core.dir/src/quartercircle_pi.cpp.o" \
+"CMakeFiles/core.dir/src/buffon_pi.cpp.o"
 
 # External object files for target core
 core_EXTERNAL_OBJECTS =
 
 libcore.a: CMakeFiles/core.dir/src/rng.cpp.o
 libcore.a: CMakeFiles/core.dir/src/io.cpp.o
+libcore.a: CMakeFiles/core.dir/src/quartercircle_pi.cpp.o
+libcore.a: CMakeFiles/core.dir/src/buffon_pi.cpp.o
 libcore.a: CMakeFiles/core.dir/build.make
 libcore.a: CMakeFiles/core.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/julian/MonteCarloTransport/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX static library libcore.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/julian/MonteCarloTransport/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX static library libcore.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/core.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/core.dir/link.txt --verbose=$(VERBOSE)
 

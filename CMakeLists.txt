@@ -9,6 +9,8 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 add_library(core STATIC
     src/rng.cpp
     src/io.cpp
+    src/quartercircle_pi.cpp
+    src/buffon_pi.cpp
 )
 
 target_include_directories(core PUBLIC include)

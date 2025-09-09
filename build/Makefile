@@ -203,6 +203,30 @@ apps/quartercircle/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/quartercircle.dir/build.make CMakeFiles/quartercircle.dir/apps/quartercircle/main.cpp.s
 .PHONY : apps/quartercircle/main.cpp.s
 
+src/buffon_pi.o: src/buffon_pi.cpp.o
+.PHONY : src/buffon_pi.o
+
+# target to build an object file
+src/buffon_pi.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/core.dir/build.make CMakeFiles/core.dir/src/buffon_pi.cpp.o
+.PHONY : src/buffon_pi.cpp.o
+
+src/buffon_pi.i: src/buffon_pi.cpp.i
+.PHONY : src/buffon_pi.i
+
+# target to preprocess a source file
+src/buffon_pi.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/core.dir/build.make CMakeFiles/core.dir/src/buffon_pi.cpp.i
+.PHONY : src/buffon_pi.cpp.i
+
+src/buffon_pi.s: src/buffon_pi.cpp.s
+.PHONY : src/buffon_pi.s
+
+# target to generate assembly for a file
+src/buffon_pi.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/core.dir/build.make CMakeFiles/core.dir/src/buffon_pi.cpp.s
+.PHONY : src/buffon_pi.cpp.s
+
 src/io.o: src/io.cpp.o
 .PHONY : src/io.o
 
@@ -226,6 +250,30 @@ src/io.s: src/io.cpp.s
 src/io.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/core.dir/build.make CMakeFiles/core.dir/src/io.cpp.s
 .PHONY : src/io.cpp.s
+
+src/quartercircle_pi.o: src/quartercircle_pi.cpp.o
+.PHONY : src/quartercircle_pi.o
+
+# target to build an object file
+src/quartercircle_pi.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/core.dir/build.make CMakeFiles/core.dir/src/quartercircle_pi.cpp.o
+.PHONY : src/quartercircle_pi.cpp.o
+
+src/quartercircle_pi.i: src/quartercircle_pi.cpp.i
+.PHONY : src/quartercircle_pi.i
+
+# target to preprocess a source file
+src/quartercircle_pi.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/core.dir/build.make CMakeFiles/core.dir/src/quartercircle_pi.cpp.i
+.PHONY : src/quartercircle_pi.cpp.i
+
+src/quartercircle_pi.s: src/quartercircle_pi.cpp.s
+.PHONY : src/quartercircle_pi.s
+
+# target to generate assembly for a file
+src/quartercircle_pi.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/core.dir/build.make CMakeFiles/core.dir/src/quartercircle_pi.cpp.s
+.PHONY : src/quartercircle_pi.cpp.s
 
 src/rng.o: src/rng.cpp.o
 .PHONY : src/rng.o
@@ -268,9 +316,15 @@ help:
 	@echo "... apps/quartercircle/main.o"
 	@echo "... apps/quartercircle/main.i"
 	@echo "... apps/quartercircle/main.s"
+	@echo "... src/buffon_pi.o"
+	@echo "... src/buffon_pi.i"
+	@echo "... src/buffon_pi.s"
 	@echo "... src/io.o"
 	@echo "... src/io.i"
 	@echo "... src/io.s"
+	@echo "... src/quartercircle_pi.o"
+	@echo "... src/quartercircle_pi.i"
+	@echo "... src/quartercircle_pi.s"
 	@echo "... src/rng.o"
 	@echo "... src/rng.i"
 	@echo "... src/rng.s"
