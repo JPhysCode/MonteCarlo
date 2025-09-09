@@ -7,6 +7,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/core.dir/src/quartercircle_pi.cpp.o.d"
   "CMakeFiles/core.dir/src/rng.cpp.o"
   "CMakeFiles/core.dir/src/rng.cpp.o.d"
+  "CMakeFiles/core.dir/src/statistics.cpp.o"
+  "CMakeFiles/core.dir/src/statistics.cpp.o.d"
   "libcore.a"
   "libcore.pdb"
 )

@@ -1,5 +1,5 @@
-CMakeFiles/stat_quartercircle.dir/apps/stat_quartercircle/main.cpp.o: \
- /home/julian/MonteCarloTransport/apps/stat_quartercircle/main.cpp \
+CMakeFiles/stat_buffonsneedle.dir/apps/stat_buffonsneedle/main.cpp.o: \
+ /home/julian/MonteCarloTransport/apps/stat_buffonsneedle/main.cpp \
  /usr/include/stdc-predef.h /home/julian/MonteCarloTransport/include/io.h \
  /usr/include/c++/10/cstdint \
  /usr/include/x86_64-linux-gnu/c++/10/bits/c++config.h \
@@ -153,7 +153,7 @@ CMakeFiles/stat_quartercircle.dir/apps/stat_quartercircle/main.cpp.o: \
  /usr/include/c++/10/bits/fstream.tcc /usr/include/c++/10/chrono \
  /usr/include/c++/10/ratio /usr/include/c++/10/limits \
  /usr/include/c++/10/ctime /usr/include/c++/10/bits/parse_numbers.h \
- /home/julian/MonteCarloTransport/include/quartercircle_pi.h \
+ /home/julian/MonteCarloTransport/include/buffon_pi.h \
  /home/julian/MonteCarloTransport/include/statistics.h \
  /usr/include/c++/10/vector /usr/include/c++/10/bits/stl_uninitialized.h \
  /usr/include/c++/10/bits/stl_vector.h \

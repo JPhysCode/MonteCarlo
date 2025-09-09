@@ -1,5 +1,5 @@
 #include "io.h"
-#include "quartercircle_pi.h"
+#include "buffon_pi.h"
 #include "statistics.h"
 #include <iostream>
 #include <cstdint>
@@ -7,9 +7,11 @@
 
 int main() {
     // Read input using I/O module
-    StatQuarterCircleInput input = readStatQuarterCircleInput("input.txt");
+    StatBuffonInput input = readStatBuffonInput("input.txt");
     std::uint64_t numSamples = input.samples;
     std::uint64_t seed = input.seed;
+    double needleLength = input.needleLength;
+    double lineSpacing = input.lineSpacing;
     std::uint64_t numRuns = input.numRuns;
 
     // Run multiple simulations
@@ -21,16 +23,17 @@ int main() {
     for (std::uint64_t run = 0; run < numRuns; ++run) {
         // Use different seed for each run to ensure independence
         std::uint64_t runSeed = seed + run;
-        QuarterCircleResult result = runQuarterCircleSimulation(numSamples, runSeed);
+        BuffonResult result = runBuffonSimulation(numSamples, runSeed, needleLength, lineSpacing);
         piValues.push_back(result.piEstimate);
         runtimes.push_back(result.runtime);
     }
 
-    // Calculate all statistics at once (no redundant recomputation inside)
+    // Calculate all statistics
     StatisticalResult stats = Statistics::calculateAll(piValues, runtimes);
     
     // Output using variadic template including statistics
     printAndSave("output.txt", "runs=", numRuns, " samples=", numSamples, " seed=", seed,
+                 " needle=", needleLength, " spacing=", lineSpacing,
                  " mean=", stats.mean, " stddev=", stats.stdDev, 
                  " avg_runtime=", stats.avgRuntime, "s fom=", stats.fom);
     

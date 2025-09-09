@@ -25,9 +25,18 @@ struct StatQuarterCircleInput {
     std::uint64_t numRuns;
 };
 
+struct StatBuffonInput {
+    std::uint64_t samples;
+    std::uint64_t seed;
+    double needleLength;
+    double lineSpacing;
+    std::uint64_t numRuns;
+};
+
 QuarterCircleInput readQuarterCircleInput(const std::string& filename);
 BuffonInput readBuffonInput(const std::string& filename);
 StatQuarterCircleInput readStatQuarterCircleInput(const std::string& filename);
+StatBuffonInput readStatBuffonInput(const std::string& filename);
 
 // Timing utility class
 class Timer {

@@ -168,6 +168,19 @@ stat_quartercircle/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/stat_quartercircle.dir/build.make CMakeFiles/stat_quartercircle.dir/build
 .PHONY : stat_quartercircle/fast
 
+#=============================================================================
+# Target rules for targets named stat_buffonsneedle
+
+# Build rule for target.
+stat_buffonsneedle: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 stat_buffonsneedle
+.PHONY : stat_buffonsneedle
+
+# fast build rule for target.
+stat_buffonsneedle/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stat_buffonsneedle.dir/build.make CMakeFiles/stat_buffonsneedle.dir/build
+.PHONY : stat_buffonsneedle/fast
+
 apps/buffonsneedle/main.o: apps/buffonsneedle/main.cpp.o
 .PHONY : apps/buffonsneedle/main.o
 
@@ -215,6 +228,30 @@ apps/quartercircle/main.s: apps/quartercircle/main.cpp.s
 apps/quartercircle/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/quartercircle.dir/build.make CMakeFiles/quartercircle.dir/apps/quartercircle/main.cpp.s
 .PHONY : apps/quartercircle/main.cpp.s
+
+apps/stat_buffonsneedle/main.o: apps/stat_buffonsneedle/main.cpp.o
+.PHONY : apps/stat_buffonsneedle/main.o
+
+# target to build an object file
+apps/stat_buffonsneedle/main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stat_buffonsneedle.dir/build.make CMakeFiles/stat_buffonsneedle.dir/apps/stat_buffonsneedle/main.cpp.o
+.PHONY : apps/stat_buffonsneedle/main.cpp.o
+
+apps/stat_buffonsneedle/main.i: apps/stat_buffonsneedle/main.cpp.i
+.PHONY : apps/stat_buffonsneedle/main.i
+
+# target to preprocess a source file
+apps/stat_buffonsneedle/main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stat_buffonsneedle.dir/build.make CMakeFiles/stat_buffonsneedle.dir/apps/stat_buffonsneedle/main.cpp.i
+.PHONY : apps/stat_buffonsneedle/main.cpp.i
+
+apps/stat_buffonsneedle/main.s: apps/stat_buffonsneedle/main.cpp.s
+.PHONY : apps/stat_buffonsneedle/main.s
+
+# target to generate assembly for a file
+apps/stat_buffonsneedle/main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stat_buffonsneedle.dir/build.make CMakeFiles/stat_buffonsneedle.dir/apps/stat_buffonsneedle/main.cpp.s
+.PHONY : apps/stat_buffonsneedle/main.cpp.s
 
 apps/stat_quartercircle/main.o: apps/stat_quartercircle/main.cpp.o
 .PHONY : apps/stat_quartercircle/main.o
@@ -336,6 +373,30 @@ src/rng.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/core.dir/build.make CMakeFiles/core.dir/src/rng.cpp.s
 .PHONY : src/rng.cpp.s
 
+src/statistics.o: src/statistics.cpp.o
+.PHONY : src/statistics.o
+
+# target to build an object file
+src/statistics.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/core.dir/build.make CMakeFiles/core.dir/src/statistics.cpp.o
+.PHONY : src/statistics.cpp.o
+
+src/statistics.i: src/statistics.cpp.i
+.PHONY : src/statistics.i
+
+# target to preprocess a source file
+src/statistics.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/core.dir/build.make CMakeFiles/core.dir/src/statistics.cpp.i
+.PHONY : src/statistics.cpp.i
+
+src/statistics.s: src/statistics.cpp.s
+.PHONY : src/statistics.s
+
+# target to generate assembly for a file
+src/statistics.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/core.dir/build.make CMakeFiles/core.dir/src/statistics.cpp.s
+.PHONY : src/statistics.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -347,6 +408,7 @@ help:
 	@echo "... buffonsneedle"
 	@echo "... core"
 	@echo "... quartercircle"
+	@echo "... stat_buffonsneedle"
 	@echo "... stat_quartercircle"
 	@echo "... apps/buffonsneedle/main.o"
 	@echo "... apps/buffonsneedle/main.i"
@@ -354,6 +416,9 @@ help:
 	@echo "... apps/quartercircle/main.o"
 	@echo "... apps/quartercircle/main.i"
 	@echo "... apps/quartercircle/main.s"
+	@echo "... apps/stat_buffonsneedle/main.o"
+	@echo "... apps/stat_buffonsneedle/main.i"
+	@echo "... apps/stat_buffonsneedle/main.s"
 	@echo "... apps/stat_quartercircle/main.o"
 	@echo "... apps/stat_quartercircle/main.i"
 	@echo "... apps/stat_quartercircle/main.s"
@@ -369,6 +434,9 @@ help:
 	@echo "... src/rng.o"
 	@echo "... src/rng.i"
 	@echo "... src/rng.s"
+	@echo "... src/statistics.o"
+	@echo "... src/statistics.i"
+	@echo "... src/statistics.s"
 .PHONY : help
 
 

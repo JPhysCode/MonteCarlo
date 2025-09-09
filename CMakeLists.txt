@@ -11,6 +11,7 @@ add_library(core STATIC
     src/io.cpp
     src/quartercircle_pi.cpp
     src/buffon_pi.cpp
+    src/statistics.cpp
 )
 
 target_include_directories(core PUBLIC include)
@@ -29,3 +30,8 @@ target_link_libraries(buffonsneedle PRIVATE core)
 add_executable(stat_quartercircle apps/stat_quartercircle/main.cpp)
 
 target_link_libraries(stat_quartercircle PRIVATE core)
+
+# Statistical Buffon's Needle Pi estimator executable
+add_executable(stat_buffonsneedle apps/stat_buffonsneedle/main.cpp)
+
+target_link_libraries(stat_buffonsneedle PRIVATE core)

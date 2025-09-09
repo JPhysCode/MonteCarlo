@@ -1,0 +1,1 @@
+runs=10 samples=100000 seed=42 needle=1 spacing=2 mean=3.14529 stddev=0.00970317 avg_runtime=0.0130626s fom=813099

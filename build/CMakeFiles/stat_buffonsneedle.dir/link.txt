@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/stat_buffonsneedle.dir/apps/stat_buffonsneedle/main.cpp.o -o stat_buffonsneedle  libcore.a

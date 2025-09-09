@@ -1,2 +1,2 @@
-/usr/bin/ar qc libcore.a CMakeFiles/core.dir/src/rng.cpp.o CMakeFiles/core.dir/src/io.cpp.o CMakeFiles/core.dir/src/quartercircle_pi.cpp.o CMakeFiles/core.dir/src/buffon_pi.cpp.o
+/usr/bin/ar qc libcore.a CMakeFiles/core.dir/src/rng.cpp.o CMakeFiles/core.dir/src/io.cpp.o CMakeFiles/core.dir/src/quartercircle_pi.cpp.o CMakeFiles/core.dir/src/buffon_pi.cpp.o CMakeFiles/core.dir/src/statistics.cpp.o
 /usr/bin/ranlib libcore.a

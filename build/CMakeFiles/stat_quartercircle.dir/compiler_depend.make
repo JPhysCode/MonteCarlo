@@ -4,6 +4,7 @@
 CMakeFiles/stat_quartercircle.dir/apps/stat_quartercircle/main.cpp.o: /home/julian/MonteCarloTransport/apps/stat_quartercircle/main.cpp \
   /home/julian/MonteCarloTransport/include/io.h \
   /home/julian/MonteCarloTransport/include/quartercircle_pi.h \
+  /home/julian/MonteCarloTransport/include/statistics.h \
   /usr/include/alloca.h \
   /usr/include/asm-generic/errno-base.h \
   /usr/include/asm-generic/errno.h \
@@ -47,7 +48,6 @@ CMakeFiles/stat_quartercircle.dir/apps/stat_quartercircle/main.cpp.o: /home/juli
   /usr/include/c++/10/bits/ptr_traits.h \
   /usr/include/c++/10/bits/range_access.h \
   /usr/include/c++/10/bits/range_cmp.h \
-  /usr/include/c++/10/bits/specfun.h \
   /usr/include/c++/10/bits/sstream.tcc \
   /usr/include/c++/10/bits/std_abs.h \
   /usr/include/c++/10/bits/stl_algobase.h \
@@ -69,7 +69,6 @@ CMakeFiles/stat_quartercircle.dir/apps/stat_quartercircle/main.cpp.o: /home/juli
   /usr/include/c++/10/cerrno \
   /usr/include/c++/10/chrono \
   /usr/include/c++/10/clocale \
-  /usr/include/c++/10/cmath \
   /usr/include/c++/10/concepts \
   /usr/include/c++/10/cstdint \
   /usr/include/c++/10/cstdio \
@@ -103,18 +102,6 @@ CMakeFiles/stat_quartercircle.dir/apps/stat_quartercircle/main.cpp.o: /home/juli
   /usr/include/c++/10/string \
   /usr/include/c++/10/string_view \
   /usr/include/c++/10/system_error \
-  /usr/include/c++/10/tr1/bessel_function.tcc \
-  /usr/include/c++/10/tr1/beta_function.tcc \
-  /usr/include/c++/10/tr1/ell_integral.tcc \
-  /usr/include/c++/10/tr1/exp_integral.tcc \
-  /usr/include/c++/10/tr1/gamma.tcc \
-  /usr/include/c++/10/tr1/hypergeometric.tcc \
-  /usr/include/c++/10/tr1/legendre_function.tcc \
-  /usr/include/c++/10/tr1/modified_bessel_func.tcc \
-  /usr/include/c++/10/tr1/poly_hermite.tcc \
-  /usr/include/c++/10/tr1/poly_laguerre.tcc \
-  /usr/include/c++/10/tr1/riemann_zeta.tcc \
-  /usr/include/c++/10/tr1/special_function_util.h \
   /usr/include/c++/10/type_traits \
   /usr/include/c++/10/typeinfo \
   /usr/include/c++/10/vector \
@@ -124,7 +111,6 @@ CMakeFiles/stat_quartercircle.dir/apps/stat_quartercircle/main.cpp.o: /home/juli
   /usr/include/features.h \
   /usr/include/linux/errno.h \
   /usr/include/locale.h \
-  /usr/include/math.h \
   /usr/include/pthread.h \
   /usr/include/sched.h \
   /usr/include/stdc-predef.h \
@@ -142,18 +128,9 @@ CMakeFiles/stat_quartercircle.dir/apps/stat_quartercircle/main.cpp.o: /home/juli
   /usr/include/x86_64-linux-gnu/bits/errno.h \
   /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
   /usr/include/x86_64-linux-gnu/bits/floatn.h \
-  /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
-  /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
-  /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
-  /usr/include/x86_64-linux-gnu/bits/iscanonical.h \
   /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
-  /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
   /usr/include/x86_64-linux-gnu/bits/locale.h \
   /usr/include/x86_64-linux-gnu/bits/long-double.h \
-  /usr/include/x86_64-linux-gnu/bits/math-vector.h \
-  /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
-  /usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h \
-  /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
   /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h \
   /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
   /usr/include/x86_64-linux-gnu/bits/sched.h \
@@ -231,15 +208,23 @@ CMakeFiles/stat_quartercircle.dir/apps/stat_quartercircle/main.cpp.o: /home/juli
 
 /usr/include/x86_64-linux-gnu/sys/cdefs.h:
 
+/usr/include/x86_64-linux-gnu/gnu/stubs-64.h:
+
 /usr/include/x86_64-linux-gnu/c++/10/bits/gthr.h:
 
 /usr/include/x86_64-linux-gnu/c++/10/bits/error_constants.h:
+
+/usr/include/x86_64-linux-gnu/c++/10/bits/cpu_defines.h:
 
 /usr/include/x86_64-linux-gnu/c++/10/bits/c++locale.h:
 
 /usr/include/x86_64-linux-gnu/bits/waitstatus.h:
 
 /usr/include/x86_64-linux-gnu/bits/typesizes.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/timer_t.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/time_t.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_tm.h:
 
@@ -252,6 +237,8 @@ CMakeFiles/stat_quartercircle.dir/apps/stat_quartercircle/main.cpp.o: /home/juli
 /usr/include/x86_64-linux-gnu/bits/wctype-wchar.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/locale_t.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/error_t.h:
 
 /usr/include/x86_64-linux-gnu/c++/10/bits/atomic_word.h:
 
@@ -293,45 +280,13 @@ CMakeFiles/stat_quartercircle.dir/apps/stat_quartercircle/main.cpp.o: /home/juli
 
 /usr/include/x86_64-linux-gnu/bits/select.h:
 
+/usr/include/x86_64-linux-gnu/bits/sched.h:
+
 /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h:
-
-/usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/error_t.h:
-
-/usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h:
-
-/usr/include/x86_64-linux-gnu/bits/math-vector.h:
 
 /usr/include/x86_64-linux-gnu/bits/locale.h:
 
-/usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h:
-
 /usr/include/x86_64-linux-gnu/bits/libc-header-start.h:
-
-/usr/include/x86_64-linux-gnu/bits/fp-logb.h:
-
-/usr/include/x86_64-linux-gnu/bits/fp-fast.h:
-
-/usr/include/x86_64-linux-gnu/c++/10/bits/gthr-default.h:
-
-/usr/include/x86_64-linux-gnu/bits/endianness.h:
-
-/usr/include/x86_64-linux-gnu/bits/byteswap.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h:
-
-/usr/include/x86_64-linux-gnu/asm/errno.h:
-
-/usr/include/wchar.h:
-
-/usr/include/time.h:
-
-/usr/include/stdlib.h:
-
-/usr/include/x86_64-linux-gnu/c++/10/bits/os_defines.h:
-
-/usr/include/stdint.h:
 
 /usr/include/c++/10/bits/stl_uninitialized.h:
 
@@ -353,13 +308,11 @@ CMakeFiles/stat_quartercircle.dir/apps/stat_quartercircle/main.cpp.o: /home/juli
 
 /usr/include/c++/10/cstdlib:
 
-/usr/include/x86_64-linux-gnu/bits/sched.h:
-
-/usr/include/c++/10/bits/specfun.h:
-
 /usr/include/x86_64-linux-gnu/bits/types/struct___jmp_buf_tag.h:
 
 /usr/include/c++/10/bits/std_abs.h:
+
+/usr/include/c++/10/bits/exception_defines.h:
 
 /usr/include/c++/10/bits/stl_function.h:
 
@@ -381,6 +334,12 @@ CMakeFiles/stat_quartercircle.dir/apps/stat_quartercircle/main.cpp.o: /home/juli
 
 /usr/include/c++/10/bits/basic_string.h:
 
+/usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h:
+
+/usr/include/x86_64-linux-gnu/bits/setjmp.h:
+
+/usr/include/c++/10/bits/nested_exception.h:
+
 /usr/include/x86_64-linux-gnu/bits/wchar.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h:
@@ -392,10 +351,6 @@ CMakeFiles/stat_quartercircle.dir/apps/stat_quartercircle/main.cpp.o: /home/juli
 /usr/include/c++/10/bits/locale_facets.tcc:
 
 /usr/include/c++/10/bits/basic_ios.h:
-
-/usr/include/stdio.h:
-
-/usr/include/c++/10/ext/atomicity.h:
 
 /usr/include/x86_64-linux-gnu/bits/waitflags.h:
 
@@ -411,13 +366,7 @@ CMakeFiles/stat_quartercircle.dir/apps/stat_quartercircle/main.cpp.o: /home/juli
 
 /usr/include/c++/10/bits/streambuf_iterator.h:
 
-/usr/include/x86_64-linux-gnu/bits/errno.h:
-
-/usr/include/wctype.h:
-
-/usr/include/c++/10/bits/memoryfwd.h:
-
-/usr/include/c++/10/vector:
+/usr/include/c++/10/bits/istream.tcc:
 
 /usr/include/c++/10/bits/predefined_ops.h:
 
@@ -429,17 +378,19 @@ CMakeFiles/stat_quartercircle.dir/apps/stat_quartercircle/main.cpp.o: /home/juli
 
 /usr/include/c++/10/cstdint:
 
-/usr/include/x86_64-linux-gnu/bits/cpu-set.h:
+/usr/include/c++/10/ext/atomicity.h:
 
-/usr/include/c++/10/chrono:
+/usr/include/stdio.h:
 
-/usr/include/x86_64-linux-gnu/gnu/stubs-64.h:
+/usr/include/c++/10/bits/stl_iterator_base_funcs.h:
 
-/usr/include/c++/10/tr1/special_function_util.h:
-
-/usr/include/x86_64-linux-gnu/bits/mathcalls.h:
+/home/julian/MonteCarloTransport/include/io.h:
 
 /usr/include/c++/10/bits/stl_vector.h:
+
+/home/julian/MonteCarloTransport/include/statistics.h:
+
+/usr/include/asm-generic/errno.h:
 
 /usr/include/c++/10/bits/stringfwd.h:
 
@@ -447,17 +398,7 @@ CMakeFiles/stat_quartercircle.dir/apps/stat_quartercircle/main.cpp.o: /home/juli
 
 /usr/include/c++/10/bits/move.h:
 
-/usr/include/c++/10/bits/stl_iterator_base_funcs.h:
-
-/home/julian/MonteCarloTransport/include/io.h:
-
-/usr/include/x86_64-linux-gnu/c++/10/bits/cpu_defines.h:
-
-/usr/include/c++/10/tr1/legendre_function.tcc:
-
-/usr/include/c++/10/tr1/poly_hermite.tcc:
-
-/usr/include/c++/10/tr1/beta_function.tcc:
+/usr/include/c++/10/bits/ios_base.h:
 
 /usr/include/sched.h:
 
@@ -470,14 +411,6 @@ CMakeFiles/stat_quartercircle.dir/apps/stat_quartercircle/main.cpp.o: /home/juli
 /usr/include/c++/10/bits/locale_classes.h:
 
 /home/julian/MonteCarloTransport/include/quartercircle_pi.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h:
-
-/usr/include/x86_64-linux-gnu/bits/setjmp.h:
-
-/usr/include/c++/10/bits/nested_exception.h:
-
-/usr/include/c++/10/tr1/exp_integral.tcc:
 
 /usr/include/c++/10/bits/stl_construct.h:
 
@@ -497,8 +430,6 @@ CMakeFiles/stat_quartercircle.dir/apps/stat_quartercircle/main.cpp.o: /home/juli
 
 /usr/include/ctype.h:
 
-/usr/include/c++/10/bits/istream.tcc:
-
 /usr/include/c++/10/bits/basic_ios.tcc:
 
 /usr/include/c++/10/bits/range_access.h:
@@ -514,12 +445,6 @@ CMakeFiles/stat_quartercircle.dir/apps/stat_quartercircle/main.cpp.o: /home/juli
 /usr/include/c++/10/typeinfo:
 
 /usr/include/c++/10/bits/functexcept.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h:
-
-/usr/include/x86_64-linux-gnu/bits/floatn.h:
-
-/usr/include/c++/10/bits/concept_check.h:
 
 /usr/include/x86_64-linux-gnu/c++/10/bits/c++io.h:
 
@@ -545,17 +470,7 @@ CMakeFiles/stat_quartercircle.dir/apps/stat_quartercircle/main.cpp.o: /home/juli
 
 /usr/include/c++/10/bits/fstream.tcc:
 
-/usr/include/x86_64-linux-gnu/bits/types/wint_t.h:
-
-/usr/include/x86_64-linux-gnu/bits/floatn-common.h:
-
-/usr/include/c++/10/bits/functional_hash.h:
-
 /usr/include/c++/10/bits/streambuf.tcc:
-
-/usr/include/x86_64-linux-gnu/bits/types/timer_t.h:
-
-/usr/include/c++/10/tr1/ell_integral.tcc:
 
 /usr/include/x86_64-linux-gnu/bits/uintn-identity.h:
 
@@ -564,6 +479,10 @@ CMakeFiles/stat_quartercircle.dir/apps/stat_quartercircle/main.cpp.o: /home/juli
 /usr/include/c++/10/bits/vector.tcc:
 
 /usr/include/c++/10/cwchar:
+
+/usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h:
+
+/usr/include/x86_64-linux-gnu/asm/errno.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h:
 
@@ -574,10 +493,6 @@ CMakeFiles/stat_quartercircle.dir/apps/stat_quartercircle/main.cpp.o: /home/juli
 /usr/include/c++/10/bits/charconv.h:
 
 /usr/include/c++/10/clocale:
-
-/usr/include/x86_64-linux-gnu/bits/types/time_t.h:
-
-/usr/include/c++/10/cmath:
 
 /usr/include/x86_64-linux-gnu/c++/10/bits/ctype_base.h:
 
@@ -593,15 +508,11 @@ CMakeFiles/stat_quartercircle.dir/apps/stat_quartercircle/main.cpp.o: /home/juli
 
 /usr/include/c++/10/debug/debug.h:
 
-/usr/include/c++/10/tr1/gamma.tcc:
-
 /usr/include/c++/10/exception:
 
 /usr/include/c++/10/ext/alloc_traits.h:
 
 /usr/include/c++/10/ext/new_allocator.h:
-
-/usr/include/x86_64-linux-gnu/bits/flt-eval-method.h:
 
 /usr/include/c++/10/ext/numeric_traits.h:
 
@@ -617,11 +528,7 @@ CMakeFiles/stat_quartercircle.dir/apps/stat_quartercircle/main.cpp.o: /home/juli
 
 /usr/include/c++/10/limits:
 
-/usr/include/x86_64-linux-gnu/bits/iscanonical.h:
-
-/usr/include/c++/10/bits/ios_base.h:
-
-/usr/include/c++/10/tr1/riemann_zeta.tcc:
+/usr/include/stdlib.h:
 
 /usr/include/c++/10/new:
 
@@ -633,10 +540,6 @@ CMakeFiles/stat_quartercircle.dir/apps/stat_quartercircle/main.cpp.o: /home/juli
 
 /usr/include/c++/10/sstream:
 
-/usr/include/asm-generic/errno.h:
-
-/usr/include/c++/10/tr1/poly_laguerre.tcc:
-
 /usr/include/c++/10/stdexcept:
 
 /usr/include/c++/10/string_view:
@@ -646,14 +549,6 @@ CMakeFiles/stat_quartercircle.dir/apps/stat_quartercircle/main.cpp.o: /home/juli
 /usr/include/alloca.h:
 
 /usr/include/c++/10/system_error:
-
-/usr/include/c++/10/tr1/bessel_function.tcc:
-
-/usr/include/c++/10/bits/exception_defines.h:
-
-/usr/include/c++/10/tr1/hypergeometric.tcc:
-
-/usr/include/c++/10/tr1/modified_bessel_func.tcc:
 
 /usr/include/endian.h:
 
@@ -665,6 +560,42 @@ CMakeFiles/stat_quartercircle.dir/apps/stat_quartercircle/main.cpp.o: /home/juli
 
 /usr/include/locale.h:
 
-/usr/include/math.h:
-
 /usr/include/stdc-predef.h:
+
+/usr/include/x86_64-linux-gnu/c++/10/bits/os_defines.h:
+
+/usr/include/stdint.h:
+
+/usr/include/time.h:
+
+/usr/include/wchar.h:
+
+/usr/include/x86_64-linux-gnu/bits/byteswap.h:
+
+/usr/include/c++/10/chrono:
+
+/usr/include/x86_64-linux-gnu/bits/cpu-set.h:
+
+/usr/include/x86_64-linux-gnu/c++/10/bits/gthr-default.h:
+
+/usr/include/x86_64-linux-gnu/bits/endianness.h:
+
+/usr/include/c++/10/bits/memoryfwd.h:
+
+/usr/include/c++/10/vector:
+
+/usr/include/wctype.h:
+
+/usr/include/x86_64-linux-gnu/bits/errno.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/wint_t.h:
+
+/usr/include/c++/10/bits/functional_hash.h:
+
+/usr/include/x86_64-linux-gnu/bits/floatn-common.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h:
+
+/usr/include/c++/10/bits/concept_check.h:
+
+/usr/include/x86_64-linux-gnu/bits/floatn.h:

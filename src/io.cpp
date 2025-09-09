@@ -33,6 +33,16 @@ StatQuarterCircleInput readStatQuarterCircleInput(const std::string& filename) {
     return input;
 }
 
+StatBuffonInput readStatBuffonInput(const std::string& filename) {
+    StatBuffonInput input = {100000, 12345, 1.0, 2.0, 10}; // defaults
+    
+    std::ifstream in(filename);
+    if (in) {
+        in >> input.samples >> input.seed >> input.needleLength >> input.lineSpacing >> input.numRuns;
+    }
+    return input;
+}
+
 
 
 
