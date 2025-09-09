@@ -4,6 +4,7 @@
 #include <sstream>
 #include <iostream>
 #include <fstream>
+#include <chrono>
 
 // Specific readers for different app types
 struct QuarterCircleInput {
@@ -20,6 +21,22 @@ struct BuffonInput {
 
 QuarterCircleInput readQuarterCircleInput(const std::string& filename);
 BuffonInput readBuffonInput(const std::string& filename);
+
+// Timing utility class
+class Timer {
+public:
+    Timer();
+    void start();
+    void stop();
+    double getElapsedSeconds() const;
+    double getElapsedMilliseconds() const;
+    void reset();
+    
+private:
+    std::chrono::high_resolution_clock::time_point startTime_;
+    std::chrono::high_resolution_clock::time_point endTime_;
+    bool isRunning_;
+};
 
 // Variadic template output function
 template<typename... Args>

@@ -15,6 +15,10 @@ int main() {
     Random rng(seed);
     std::uint64_t hits = 0;
 
+    // Start timing the computation
+    Timer timer;
+    timer.start();
+
     for (std::uint64_t i = 0; i < numSamples; ++i) {
         // Random needle position (distance from nearest line)
         double y = rng.uniformxy(0.0, lineSpacing / 2.0);
@@ -29,14 +33,19 @@ int main() {
         }
     }
 
+    // Calculate results
     // Buffon's formula: π ≈ (2 * needleLength * numSamples) / (lineSpacing * hits)
     double piEstimate = (2.0 * needleLength * static_cast<double>(numSamples)) / 
                        (lineSpacing * static_cast<double>(hits));
     
-    // Output using variadic template
+    // Stop timing after all computation is complete
+    timer.stop();
+    double runtime = timer.getElapsedSeconds();
+    
+    // Output using variadic template including runtime
     printAndSave("output.txt", "samples=", numSamples, " seed=", seed, 
                  " needle=", needleLength, " spacing=", lineSpacing,
-                 " hits=", hits, " pi≈", piEstimate);
+                 " hits=", hits, " pi≈", piEstimate, " runtime=", runtime, "s");
     
     return 0;
 }
