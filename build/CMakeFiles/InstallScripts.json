@@ -1,0 +1,7 @@
+{
+	"InstallScripts" : 
+	[
+		"/home/julian/MonteCarloTransport/build/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

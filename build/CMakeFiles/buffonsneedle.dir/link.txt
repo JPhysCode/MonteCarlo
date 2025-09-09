@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/buffonsneedle.dir/apps/buffonsneedle/main.cpp.o -o buffonsneedle  libcore.a

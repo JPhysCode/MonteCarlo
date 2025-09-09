@@ -1,0 +1,1 @@
+samples=1000000 seed=12345 needle=1 spacing=2 hits=318097 pi≈3.1437

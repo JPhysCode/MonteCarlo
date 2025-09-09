@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/quartercircle.dir/apps/quartercircle/main.cpp.o -o quartercircle  libcore.a
