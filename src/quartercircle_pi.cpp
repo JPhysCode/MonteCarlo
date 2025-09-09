@@ -1,9 +1,14 @@
 #include "quartercircle_pi.h"
 #include "rng.h"
+#include "io.h"
 
-double runQuarterCircleSimulation(std::uint64_t numSamples, std::uint64_t seed) {
+QuarterCircleResult runQuarterCircleSimulation(std::uint64_t numSamples, std::uint64_t seed) {
     Random rng(seed);
     std::uint64_t inside = 0;
+
+    // Start timing the computation
+    Timer timer;
+    timer.start();
 
     // Monte Carlo simulation loop
     for (std::uint64_t i = 0; i < numSamples; ++i) {
@@ -17,5 +22,9 @@ double runQuarterCircleSimulation(std::uint64_t numSamples, std::uint64_t seed) 
     // Calculate π estimate
     double piEstimate = 4.0 * static_cast<double>(inside) / static_cast<double>(numSamples);
     
-    return piEstimate;
+    // Stop timing after all computation is complete
+    timer.stop();
+    double runtime = timer.getElapsedSeconds();
+    
+    return {piEstimate, runtime};
 }

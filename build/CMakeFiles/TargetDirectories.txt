@@ -1,5 +1,6 @@
 /home/julian/MonteCarloTransport/build/CMakeFiles/core.dir
 /home/julian/MonteCarloTransport/build/CMakeFiles/quartercircle.dir
 /home/julian/MonteCarloTransport/build/CMakeFiles/buffonsneedle.dir
+/home/julian/MonteCarloTransport/build/CMakeFiles/stat_quartercircle.dir
 /home/julian/MonteCarloTransport/build/CMakeFiles/edit_cache.dir
 /home/julian/MonteCarloTransport/build/CMakeFiles/rebuild_cache.dir

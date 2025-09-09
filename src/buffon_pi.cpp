@@ -1,10 +1,15 @@
 #include "buffon_pi.h"
 #include "rng.h"
+#include "io.h"
 #include <cmath>
 
-double runBuffonSimulation(std::uint64_t numSamples, std::uint64_t seed, double needleLength, double lineSpacing) {
+BuffonResult runBuffonSimulation(std::uint64_t numSamples, std::uint64_t seed, double needleLength, double lineSpacing) {
     Random rng(seed);
     std::uint64_t hits = 0;
+
+    // Start timing the computation
+    Timer timer;
+    timer.start();
 
     // Buffon's needle simulation loop
     for (std::uint64_t i = 0; i < numSamples; ++i) {
@@ -25,5 +30,9 @@ double runBuffonSimulation(std::uint64_t numSamples, std::uint64_t seed, double 
     double piEstimate = (2.0 * needleLength * static_cast<double>(numSamples)) / 
                        (lineSpacing * static_cast<double>(hits));
     
-    return piEstimate;
+    // Stop timing after all computation is complete
+    timer.stop();
+    double runtime = timer.getElapsedSeconds();
+    
+    return {piEstimate, runtime};
 }

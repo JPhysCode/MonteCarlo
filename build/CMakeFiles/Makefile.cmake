@@ -50,4 +50,5 @@ set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/core.dir/DependInfo.cmake"
   "CMakeFiles/quartercircle.dir/DependInfo.cmake"
   "CMakeFiles/buffonsneedle.dir/DependInfo.cmake"
+  "CMakeFiles/stat_quartercircle.dir/DependInfo.cmake"
   )

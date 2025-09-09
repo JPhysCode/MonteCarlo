@@ -155,6 +155,19 @@ buffonsneedle/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/buffonsneedle.dir/build.make CMakeFiles/buffonsneedle.dir/build
 .PHONY : buffonsneedle/fast
 
+#=============================================================================
+# Target rules for targets named stat_quartercircle
+
+# Build rule for target.
+stat_quartercircle: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 stat_quartercircle
+.PHONY : stat_quartercircle
+
+# fast build rule for target.
+stat_quartercircle/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stat_quartercircle.dir/build.make CMakeFiles/stat_quartercircle.dir/build
+.PHONY : stat_quartercircle/fast
+
 apps/buffonsneedle/main.o: apps/buffonsneedle/main.cpp.o
 .PHONY : apps/buffonsneedle/main.o
 
@@ -202,6 +215,30 @@ apps/quartercircle/main.s: apps/quartercircle/main.cpp.s
 apps/quartercircle/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/quartercircle.dir/build.make CMakeFiles/quartercircle.dir/apps/quartercircle/main.cpp.s
 .PHONY : apps/quartercircle/main.cpp.s
+
+apps/stat_quartercircle/main.o: apps/stat_quartercircle/main.cpp.o
+.PHONY : apps/stat_quartercircle/main.o
+
+# target to build an object file
+apps/stat_quartercircle/main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stat_quartercircle.dir/build.make CMakeFiles/stat_quartercircle.dir/apps/stat_quartercircle/main.cpp.o
+.PHONY : apps/stat_quartercircle/main.cpp.o
+
+apps/stat_quartercircle/main.i: apps/stat_quartercircle/main.cpp.i
+.PHONY : apps/stat_quartercircle/main.i
+
+# target to preprocess a source file
+apps/stat_quartercircle/main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stat_quartercircle.dir/build.make CMakeFiles/stat_quartercircle.dir/apps/stat_quartercircle/main.cpp.i
+.PHONY : apps/stat_quartercircle/main.cpp.i
+
+apps/stat_quartercircle/main.s: apps/stat_quartercircle/main.cpp.s
+.PHONY : apps/stat_quartercircle/main.s
+
+# target to generate assembly for a file
+apps/stat_quartercircle/main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stat_quartercircle.dir/build.make CMakeFiles/stat_quartercircle.dir/apps/stat_quartercircle/main.cpp.s
+.PHONY : apps/stat_quartercircle/main.cpp.s
 
 src/buffon_pi.o: src/buffon_pi.cpp.o
 .PHONY : src/buffon_pi.o
@@ -310,12 +347,16 @@ help:
 	@echo "... buffonsneedle"
 	@echo "... core"
 	@echo "... quartercircle"
+	@echo "... stat_quartercircle"
 	@echo "... apps/buffonsneedle/main.o"
 	@echo "... apps/buffonsneedle/main.i"
 	@echo "... apps/buffonsneedle/main.s"
 	@echo "... apps/quartercircle/main.o"
 	@echo "... apps/quartercircle/main.i"
 	@echo "... apps/quartercircle/main.s"
+	@echo "... apps/stat_quartercircle/main.o"
+	@echo "... apps/stat_quartercircle/main.i"
+	@echo "... apps/stat_quartercircle/main.s"
 	@echo "... src/buffon_pi.o"
 	@echo "... src/buffon_pi.i"
 	@echo "... src/buffon_pi.s"

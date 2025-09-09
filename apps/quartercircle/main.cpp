@@ -10,19 +10,11 @@ int main(int argc, char** argv) {
     std::uint64_t numSamples = input.samples;
     std::uint64_t seed = input.seed;
 
-    // Start timing the computation
-    Timer timer;
-    timer.start();
-
     // Run the quarter circle simulation
-    double piEstimate = runQuarterCircleSimulation(numSamples, seed);
-    
-    // Stop timing after all computation is complete
-    timer.stop();
-    double runtime = timer.getElapsedSeconds();
+    QuarterCircleResult result = runQuarterCircleSimulation(numSamples, seed);
     
     // Output using variadic template including runtime
-    printAndSave("output.txt", "samples=", numSamples, " seed=", seed, " pi≈", piEstimate, " runtime=", runtime, "s");
+    printAndSave("output.txt", "samples=", numSamples, " seed=", seed, " pi≈", result.piEstimate, " runtime=", result.runtime, "s");
     
     return 0;
 }

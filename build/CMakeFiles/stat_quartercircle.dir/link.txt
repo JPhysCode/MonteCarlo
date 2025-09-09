@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/stat_quartercircle.dir/apps/stat_quartercircle/main.cpp.o -o stat_quartercircle  libcore.a

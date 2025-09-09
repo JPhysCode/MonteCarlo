@@ -23,6 +23,19 @@ BuffonInput readBuffonInput(const std::string& filename) {
     return input;
 }
 
+StatQuarterCircleInput readStatQuarterCircleInput(const std::string& filename) {
+    StatQuarterCircleInput input = {100000, 12345, 10}; // defaults
+    
+    std::ifstream in(filename);
+    if (in) {
+        in >> input.samples >> input.seed >> input.numRuns;
+    }
+    return input;
+}
+
+
+
+
 // Timer class implementation
 Timer::Timer() : isRunning_(false) {}
 

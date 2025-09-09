@@ -24,3 +24,8 @@ target_link_libraries(quartercircle PRIVATE core)
 add_executable(buffonsneedle apps/buffonsneedle/main.cpp)
 
 target_link_libraries(buffonsneedle PRIVATE core)
+
+# Statistical Quarter-circle Pi estimator executable
+add_executable(stat_quartercircle apps/stat_quartercircle/main.cpp)
+
+target_link_libraries(stat_quartercircle PRIVATE core)
