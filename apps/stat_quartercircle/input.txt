@@ -1,3 +1,2 @@
-10
-42
-10
+samples	seed	runs
+100000	42	10

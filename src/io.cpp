@@ -2,6 +2,8 @@
 #include <fstream>
 #include <iostream>
 #include <chrono>
+#include <sstream>
+#include <unordered_map>
 
 QuarterCircleInput readQuarterCircleInput(const std::string& filename) {
     QuarterCircleInput input = {1000000, 12345}; // defaults
@@ -41,6 +43,59 @@ StatBuffonInput readStatBuffonInput(const std::string& filename) {
         in >> input.samples >> input.seed >> input.needleLength >> input.lineSpacing >> input.numRuns;
     }
     return input;
+}
+
+
+static std::vector<std::string> splitTabs(const std::string& line) {
+    std::vector<std::string> parts;
+    std::string token;
+    for (char c : line) {
+        if (c == '\t') { parts.push_back(token); token.clear(); }
+        else { token.push_back(c); }
+    }
+    parts.push_back(token);
+    return parts;
+}
+
+GenericInput readKeyValueInput(const std::string& filename, std::size_t valuesRowIndex) {
+    std::ifstream in(filename);
+    if (!in) return GenericInput{};
+    std::string header;
+    if (!std::getline(in, header)) return GenericInput{};
+    // Skip valuesRowIndex lines (values rows before the desired one)
+    std::string line;
+    for (std::size_t i = 0; i < valuesRowIndex; ++i) {
+        if (!std::getline(in, line)) return GenericInput{}; // not enough rows
+    }
+    // Read the target values row
+    std::string valuesLine;
+    if (!std::getline(in, valuesLine)) return GenericInput{};
+    GenericInput gi;
+    gi.names = splitTabs(header);
+    gi.values = splitTabs(valuesLine);
+    if (gi.values.size() > gi.names.size()) gi.values.resize(gi.names.size());
+    if (gi.values.size() < gi.names.size()) gi.names.resize(gi.values.size());
+    return gi;
+}
+
+std::size_t countDataRows(const std::string& filename) {
+    std::ifstream in(filename);
+    if (!in) return 0;
+    
+    std::string line;
+    std::size_t count = 0;
+    
+    // Skip header line
+    if (!std::getline(in, line)) return 0;
+    
+    // Count remaining lines (data rows)
+    while (std::getline(in, line)) {
+        if (!line.empty()) { // Skip empty lines
+            ++count;
+        }
+    }
+    
+    return count;
 }
 
 

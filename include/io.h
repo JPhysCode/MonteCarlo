@@ -9,6 +9,22 @@
 #include <stdexcept>
 
 // Specific readers for different app types
+// Generic key-value input
+struct GenericInput {
+    std::vector<std::string> names;
+    std::vector<std::string> values; // raw strings; convert in mains as needed
+    // Helper accessors
+    std::string getString(const std::string& key) const {
+        for (std::size_t i = 0; i < names.size(); ++i) if (names[i] == key) return values[i];
+        throw std::runtime_error("Key not found: " + key);
+    }
+    std::uint64_t getUInt64(const std::string& key) const {
+        std::stringstream ss(getString(key)); std::uint64_t v{}; ss >> v; return v;
+    }
+    double getDouble(const std::string& key) const {
+        std::stringstream ss(getString(key)); double v{}; ss >> v; return v;
+    }
+};
 struct QuarterCircleInput {
     std::uint64_t samples;
     std::uint64_t seed;
@@ -39,6 +55,13 @@ QuarterCircleInput readQuarterCircleInput(const std::string& filename);
 BuffonInput readBuffonInput(const std::string& filename);
 StatQuarterCircleInput readStatQuarterCircleInput(const std::string& filename);
 StatBuffonInput readStatBuffonInput(const std::string& filename);
+// Read key-value style input: first line = names (tab-separated),
+// subsequent lines = values rows. Select which values row to read
+// with valuesRowIndex (0 = first values row after header).
+GenericInput readKeyValueInput(const std::string& filename, std::size_t valuesRowIndex = 0);
+
+// Count the number of data rows (excluding header) in a key-value input file
+std::size_t countDataRows(const std::string& filename);
 
 // Timing utility class
 class Timer {
