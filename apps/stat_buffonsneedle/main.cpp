@@ -35,7 +35,8 @@ int main() {
     printAndSave("output.txt", "runs=", numRuns, " samples=", numSamples, " seed=", seed,
                  " needle=", needleLength, " spacing=", lineSpacing,
                  " mean=", stats.mean, " stddev=", stats.stdDev, 
-                 " avg_runtime=", stats.avgRuntime, "s fom=", stats.fom);
+                 " avg_runtime=", stats.avgRuntime, "s fom=", stats.fom,
+                 " normality_p=", stats.normalityPValue);
     
     return 0;
 }

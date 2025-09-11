@@ -8,6 +8,7 @@ struct StatisticalResult {
     double stdDev;
     double avgRuntime;
     double fom;
+    double normalityPValue;
 };
 
 // Statistics calculation class
@@ -19,6 +20,9 @@ public:
     static double calculateAvgRuntime(const std::vector<double>& runtimes);
     // Figure of merit using precomputed stats: FOM = 1 / (variance * avgRuntime)
     static double calculateFom(double mean, double stdDev, double avgRuntime);
+    
+    // Normality testing
+    static double shapiroWilkTest(const std::vector<double>& values);
     
     // Calculate all statistics
     static StatisticalResult calculateAll(const std::vector<double>& values, const std::vector<double>& runtimes);

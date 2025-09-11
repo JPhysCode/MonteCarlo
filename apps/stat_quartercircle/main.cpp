@@ -26,13 +26,14 @@ int main() {
         runtimes.push_back(result.runtime);
     }
 
-    // Calculate all statistics at once (no redundant recomputation inside)
+    // Calculate all statistics
     StatisticalResult stats = Statistics::calculateAll(piValues, runtimes);
     
     // Output using variadic template including statistics
     printAndSave("output.txt", "runs=", numRuns, " samples=", numSamples, " seed=", seed,
                  " mean=", stats.mean, " stddev=", stats.stdDev, 
-                 " avg_runtime=", stats.avgRuntime, "s fom=", stats.fom);
+                 " avg_runtime=", stats.avgRuntime, "s fom=", stats.fom,
+                 " normality_p=", stats.normalityPValue);
     
     return 0;
 }

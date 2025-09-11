@@ -1,1 +1,1 @@
-runs=10 samples=100000 seed=42 mean=3.14115 stddev=0.00422158 avg_runtime=0.0105762s fom=5.30544e+06
+runs=10 samples=10000 seed=42 mean=3.13132 stddev=0.0172326 avg_runtime=0.000911s fom=3.69642e+06 normality_p=0.5
