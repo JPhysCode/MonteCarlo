@@ -31,12 +31,18 @@ int main() {
     // Calculate all statistics
     StatisticalResult stats = Statistics::calculateAll(piValues, runtimes);
     
-    // Output using variadic template including statistics
-    printAndSave("output.txt", "runs=", numRuns, " samples=", numSamples, " seed=", seed,
-                 " needle=", needleLength, " spacing=", lineSpacing,
-                 " mean=", stats.mean, " stddev=", stats.stdDev, 
-                 " avg_runtime=", stats.avgRuntime, "s fom=", stats.fom,
-                 " normality_p=", stats.normalityPValue);
+    // Tabular two-row output
+    writeTable("output.txt",
+               "runs", numRuns,
+               "samples", numSamples,
+               "seed", seed,
+               "needle", needleLength,
+               "spacing", lineSpacing,
+               "mean", stats.mean,
+               "stddev", stats.stdDev,
+               "avg_runtime_s", stats.avgRuntime,
+               "fom", stats.fom,
+               "normality_p", stats.normalityPValue);
     
     return 0;
 }

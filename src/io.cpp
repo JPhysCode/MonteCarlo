@@ -44,6 +44,32 @@ StatBuffonInput readStatBuffonInput(const std::string& filename) {
 }
 
 
+void writeTable(const std::string& filename,
+                const std::vector<std::string>& names,
+                const std::vector<std::string>& values) {
+    if (names.size() != values.size()) {
+        throw std::runtime_error("Number of names and values must match!");
+    }
+
+    std::ofstream out(filename);
+    if (!out) throw std::runtime_error("Could not open file");
+
+    // header
+    for (std::size_t i = 0; i < names.size(); ++i) {
+        out << names[i];
+        if (i + 1 < names.size()) out << "\t"; // tab separated
+    }
+    out << "\n";
+
+    // values
+    for (std::size_t i = 0; i < values.size(); ++i) {
+        out << values[i];
+        if (i + 1 < values.size()) out << "\t";
+    }
+    out << "\n";
+}
+
+
 
 
 // Timer class implementation

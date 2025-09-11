@@ -13,8 +13,12 @@ int main(int argc, char** argv) {
     // Run the quarter circle simulation
     QuarterCircleResult result = runQuarterCircleSimulation(numSamples, seed);
     
-    // Output using variadic template including runtime
-    printAndSave("output.txt", "samples=", numSamples, " seed=", seed, " pi≈", result.piEstimate, " runtime=", result.runtime, "s");
+    // Tabular two-row output
+    writeTable("output.txt",
+               "samples", numSamples,
+               "seed", seed,
+               "pi", result.piEstimate,
+               "runtime_s", result.runtime);
     
     return 0;
 }

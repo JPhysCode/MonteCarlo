@@ -5,6 +5,8 @@
 #include <iostream>
 #include <fstream>
 #include <chrono>
+#include <vector>
+#include <stdexcept>
 
 // Specific readers for different app types
 struct QuarterCircleInput {
@@ -54,15 +56,37 @@ private:
     bool isRunning_;
 };
 
-// Variadic template output function
-template<typename... Args>
-void printAndSave(const std::string& filename, Args... args) {
-    std::stringstream ss;
-    (ss << ... << args);  // C++17 fold expression
-    std::cout << ss.str() << std::endl;
-    
-    std::ofstream out(filename);
-    if (out.is_open()) {
-        out << ss.str() << std::endl;
+// Core table writer: two-row table (header names, then values), tab-separated
+void writeTable(const std::string& filename,
+                const std::vector<std::string>& names,
+                const std::vector<std::string>& values);
+
+// Convenience: variadic name/value pairs. Usage: writeTable("out.txt", "a", 1, "b", 2.5)
+// Accepts arbitrary streamable value types; converts values to strings and forwards to core writer
+namespace detail {
+    inline void collectPairs(std::vector<std::string>& /*names*/,
+                             std::vector<std::string>& /*values*/) {}
+
+    template<typename T, typename... Rest>
+    void collectPairs(std::vector<std::string>& names,
+                      std::vector<std::string>& values,
+                      const std::string& name,
+                      const T& value,
+                      Rest... rest) {
+        std::stringstream ss; ss << value;
+        names.push_back(name);
+        values.push_back(ss.str());
+        detail::collectPairs(names, values, rest...);
     }
+}
+
+template<typename... Rest>
+void writeTable(const std::string& filename, Rest... rest) {
+    static_assert((sizeof...(rest) % 2) == 0, "writeTable expects name/value pairs");
+    std::vector<std::string> names;
+    std::vector<std::string> values;
+    names.reserve(sizeof...(rest) / 2);
+    values.reserve(sizeof...(rest) / 2);
+    detail::collectPairs(names, values, rest...);
+    writeTable(filename, names, values);
 }

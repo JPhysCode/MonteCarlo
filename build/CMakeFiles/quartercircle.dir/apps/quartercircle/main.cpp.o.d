@@ -153,4 +153,8 @@ CMakeFiles/quartercircle.dir/apps/quartercircle/main.cpp.o: \
  /usr/include/c++/10/bits/fstream.tcc /usr/include/c++/10/chrono \
  /usr/include/c++/10/ratio /usr/include/c++/10/limits \
  /usr/include/c++/10/ctime /usr/include/c++/10/bits/parse_numbers.h \
+ /usr/include/c++/10/vector /usr/include/c++/10/bits/stl_uninitialized.h \
+ /usr/include/c++/10/bits/stl_vector.h \
+ /usr/include/c++/10/bits/stl_bvector.h \
+ /usr/include/c++/10/bits/vector.tcc \
  /home/julian/MonteCarloTransport/include/quartercircle_pi.h

@@ -14,10 +14,14 @@ int main() {
     // Run the Buffon's needle simulation
     BuffonResult result = runBuffonSimulation(numSamples, seed, needleLength, lineSpacing);
     
-    // Output using variadic template including runtime
-    printAndSave("output.txt", "samples=", numSamples, " seed=", seed, 
-                 " needle=", needleLength, " spacing=", lineSpacing,
-                 " pi≈", result.piEstimate, " runtime=", result.runtime, "s");
+    // Tabular two-row output
+    writeTable("output.txt",
+               "samples", numSamples,
+               "seed", seed,
+               "needle", needleLength,
+               "spacing", lineSpacing,
+               "pi", result.piEstimate,
+               "runtime_s", result.runtime);
     
     return 0;
 }

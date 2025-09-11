@@ -1,1 +1,0 @@
-samples=100000 seed=42 needle=1 spacing=2 pi≈3.14861 runtime=0.012864s
