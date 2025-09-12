@@ -4,6 +4,9 @@
 #include <cstdint>
 
 int main() {
+    // Clear output file if it exists
+    clearFileIfExists("output.txt");
+    
     // Count number of data rows
     std::size_t numRows = countDataRows("input.txt");
     

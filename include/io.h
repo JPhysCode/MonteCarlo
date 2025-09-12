@@ -79,6 +79,9 @@ private:
     bool isRunning_;
 };
 
+// Clear file if it exists
+void clearFileIfExists(const std::string& filename);
+
 // Core table writer: two-row table (header names, then values), tab-separated
 void writeTable(const std::string& filename,
                 const std::vector<std::string>& names,

@@ -1,2 +1,6 @@
-samples	seed	needle	spacing	runs
-100000	42	1.0	2.0	10
+runs	samples	seed	needle	spacing
+10	100000	42	1.0	2.0
+100	10000	42	1.0	2.0
+1000	1000	42	1.0	2.0
+10000	100	42	1.0	2.0
+100000	10	42	1.0	2.0

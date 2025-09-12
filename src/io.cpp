@@ -4,6 +4,7 @@
 #include <chrono>
 #include <sstream>
 #include <unordered_map>
+#include <cstdio> // For std::remove
 
 QuarterCircleInput readQuarterCircleInput(const std::string& filename) {
     QuarterCircleInput input = {1000000, 12345}; // defaults
@@ -55,6 +56,15 @@ static std::vector<std::string> splitTabs(const std::string& line) {
     }
     parts.push_back(token);
     return parts;
+}
+
+// Clear file if it exists
+void clearFileIfExists(const std::string& filename) {
+    std::ifstream file(filename);
+    if (file.good()) {
+        file.close();
+        std::remove(filename.c_str());
+    }
 }
 
 GenericInput readKeyValueInput(const std::string& filename, std::size_t valuesRowIndex) {
