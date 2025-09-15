@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/normalitytest.dir/apps/normalitytest/main.cpp.o -o normalitytest  libcore.a

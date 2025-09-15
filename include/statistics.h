@@ -21,8 +21,10 @@ public:
     // Figure of merit using precomputed stats: FOM = 1 / (variance * avgRuntime)
     static double calculateFom(double mean, double stdDev, double avgRuntime);
     
-    // Normality testing
-    static double shapiroWilkTest(const std::vector<double>& values);
+    // Normality testing (Kolmogorov–Smirnov against Normal with sample mean/std).
+    // Note: Since parameters are estimated from the sample, this is a Lilliefors-type
+    // approximation; p-values are based on the asymptotic Kolmogorov distribution.
+    static double ksNormalTest(const std::vector<double>& values);
     
     // Calculate all statistics
     static StatisticalResult calculateAll(const std::vector<double>& values, const std::vector<double>& runtimes);

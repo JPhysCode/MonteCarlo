@@ -34,57 +34,49 @@ double Statistics::calculateFom(double /*mean*/, double stdDev, double avgRuntim
     return 1.0 / (variance * avgRuntime);
 }
 
-double Statistics::shapiroWilkTest(const std::vector<double>& values) {
-    // Simplified Shapiro-Wilk test implementation
-    // For small samples (n <= 50), this provides a reasonable approximation
-    std::vector<double> sortedValues = values;
-    std::sort(sortedValues.begin(), sortedValues.end());
-    
-    std::uint64_t n = sortedValues.size();
-    if (n < 3) return 1.0; // Not enough data for meaningful test
-    
-    // Calculate mean and standard deviation
+// Kolmogorov–Smirnov test against N(mean, stdDev) using sample mean/stdDev.
+// Lilliefors-type setting: parameters estimated from data; p-values use
+// asymptotic Kolmogorov distribution as an approximation.
+static double normalCdf(double z) {
+    return 0.5 * (1.0 + std::erf(z / std::sqrt(2.0)));
+}
+
+static double ksPvalue(double d, std::size_t n) {
+    // Asymptotic Kolmogorov distribution approximation
+    double sum = 0.0;
+    for (int k = 1; k <= 100; ++k) {
+        double term = std::exp(-2.0 * k * k * d * d * static_cast<double>(n));
+        sum += ((k % 2 == 1) ? 1.0 : -1.0) * term;
+        if (term < 1e-12) break;
+    }
+    double p = 2.0 * sum;
+    if (p < 0.0) p = 0.0; if (p > 1.0) p = 1.0;
+    return p;
+}
+
+double Statistics::ksNormalTest(const std::vector<double>& values) {
+    std::size_t n = values.size();
+    if (n < 3) return 1.0;
     double mean = calculateMean(values);
     double stdDev = calculateStdDev(values, mean);
+    if (stdDev == 0.0) return 1.0;
     
-    if (stdDev == 0.0) return 1.0; // All values are identical
+    std::vector<double> sorted = values;
+    std::sort(sorted.begin(), sorted.end());
     
-    // Calculate W statistic (simplified version)
-    double numerator = 0.0;
-    double denominator = 0.0;
-    
-    for (std::uint64_t i = 0; i < n; ++i) {
-        double x = (sortedValues[i] - mean) / stdDev;
-        double expected = 0.0;
-        
-        // Approximate expected order statistics for normal distribution
-        double p = (static_cast<double>(i) + 1.0 - 0.375) / (n + 0.25);
-        if (p > 0.0 && p < 1.0) {
-            // Inverse normal CDF approximation
-            double t = std::sqrt(-2.0 * std::log(p));
-            expected = t - (2.515517 + 0.802853 * t + 0.010328 * t * t) / 
-                       (1.0 + 1.432788 * t + 0.189269 * t * t + 0.001308 * t * t * t);
-        }
-        
-        numerator += expected * x;
-        denominator += x * x;
+    double d = 0.0;
+    for (std::size_t i = 0; i < n; ++i) {
+        double x = sorted[i];
+        double z = (x - mean) / stdDev;
+        double F = normalCdf(z);
+        double Fn_after = static_cast<double>(i + 1) / static_cast<double>(n);
+        double Fn_before = static_cast<double>(i) / static_cast<double>(n);
+        double d_plus = Fn_after - F;   // sup over (F_n(x) - F(x))
+        double d_minus = F - Fn_before; // sup over (F(x) - F_n(x-))
+        if (d_plus > d) d = d_plus;
+        if (d_minus > d) d = d_minus;
     }
-    
-    double W = (numerator * numerator) / denominator;
-    
-    // Approximate p-value calculation for the Shapiro-Wilk test
-    double pValue = 1.0;
-    if (W < 0.9) {
-        pValue = 0.01; // Very likely not normal
-    } else if (W < 0.95) {
-        pValue = 0.05; // Likely not normal
-    } else if (W < 0.98) {
-        pValue = 0.1;  // Possibly not normal
-    } else {
-        pValue = 0.5;  // Likely normal
-    }
-    
-    return pValue;
+    return ksPvalue(d, n);
 }
 
 StatisticalResult Statistics::calculateAll(const std::vector<double>& values, const std::vector<double>& runtimes) {
@@ -92,7 +84,7 @@ StatisticalResult Statistics::calculateAll(const std::vector<double>& values, co
     double stdDev = calculateStdDev(values, mean);
     double avgRuntime = calculateAvgRuntime(runtimes);
     double fom = calculateFom(mean, stdDev, avgRuntime);
-    double normalityPValue = shapiroWilkTest(values);
+    double normalityPValue = ksNormalTest(values);
     
     return {mean, stdDev, avgRuntime, fom, normalityPValue};
 }
