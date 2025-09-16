@@ -21,10 +21,14 @@ public:
     // Figure of merit using precomputed stats: FOM = 1 / (variance * avgRuntime)
     static double calculateFom(double mean, double stdDev, double avgRuntime);
     
-    // Normality testing (Kolmogorov–Smirnov against Normal with sample mean/std).
-    // Note: Since parameters are estimated from the sample, this is a Lilliefors-type
-    // approximation; p-values are based on the asymptotic Kolmogorov distribution.
-    static double ksNormalTest(const std::vector<double>& values);
+    // Shapiro–Francia normality test.
+    // Returns the statistic W' in (0,1]. If the input size n < 5, returns NaN.
+    static double shapiroFranciaW(const std::vector<double>& values);
+    
+    // Shapiro–Francia p-value using Royston calibration (valid roughly for 5 <= n <= 5000).
+    // If n > 5000, computes p-value on a uniform random subsample of size 5000.
+    // If n < 5, returns NaN.
+    static double shapiroFranciaPValue(const std::vector<double>& values);
     
     // Calculate all statistics
     static StatisticalResult calculateAll(const std::vector<double>& values, const std::vector<double>& runtimes);

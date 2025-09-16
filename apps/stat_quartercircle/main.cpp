@@ -33,7 +33,7 @@ int main() {
             piValues.push_back(result.piEstimate);
             runtimes.push_back(result.runtime);
             // Write each pi estimate to pi_estimates.txt (header once, rows appended)
-            writeTable("pi_estimates.txt", "pi", result.piEstimate);
+            //writeTable("pi_estimates.txt", "pi", result.piEstimate);
         }
 
         // Calculate all statistics
