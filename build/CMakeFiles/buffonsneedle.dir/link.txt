@@ -1,1 +1,1 @@
-/usr/bin/c++ CMakeFiles/buffonsneedle.dir/apps/buffonsneedle/main.cpp.o -o buffonsneedle  libcore.a
+/usr/bin/c++ -O3 -DNDEBUG CMakeFiles/buffonsneedle.dir/apps/buffonsneedle/main.cpp.o -o buffonsneedle  libcore.a
