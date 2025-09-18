@@ -20,13 +20,12 @@ BuffonResult runBuffonSimulation(std::uint64_t numSamples, std::uint64_t seed, d
         double theta = rng.uniformxy(0.0, M_PI / 2.0);
         
         // Check if needle crosses a line
-        // Needle crosses if: y <= (needleLength/2) * sin(theta)
         if (y <= (needleLength / 2.0) * std::sin(theta)) {
             ++hits;
         }
     }
 
-    // Buffon's formula: π ≈ (2 * needleLength * numSamples) / (lineSpacing * hits)
+    // Buffon's formula
     double piEstimate = (2.0 * needleLength * static_cast<double>(numSamples)) / 
                        (lineSpacing * static_cast<double>(hits));
     

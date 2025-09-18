@@ -6,47 +6,7 @@
 #include <unordered_map>
 #include <cstdio> // For std::remove
 
-QuarterCircleInput readQuarterCircleInput(const std::string& filename) {
-    QuarterCircleInput input = {1000000, 12345}; // defaults
-    
-    std::ifstream in(filename);
-    if (in) {
-        in >> input.samples >> input.seed;
-    }
-    return input;
-}
-
-BuffonInput readBuffonInput(const std::string& filename) {
-    BuffonInput input = {1000000, 12345, 1.0, 2.0}; // defaults
-    
-    std::ifstream in(filename);
-    if (in) {
-        in >> input.samples >> input.seed >> input.needleLength >> input.lineSpacing;
-    }
-    return input;
-}
-
-StatQuarterCircleInput readStatQuarterCircleInput(const std::string& filename) {
-    StatQuarterCircleInput input = {100000, 12345, 10}; // defaults
-    
-    std::ifstream in(filename);
-    if (in) {
-        in >> input.samples >> input.seed >> input.numRuns;
-    }
-    return input;
-}
-
-StatBuffonInput readStatBuffonInput(const std::string& filename) {
-    StatBuffonInput input = {100000, 12345, 1.0, 2.0, 10}; // defaults
-    
-    std::ifstream in(filename);
-    if (in) {
-        in >> input.samples >> input.seed >> input.needleLength >> input.lineSpacing >> input.numRuns;
-    }
-    return input;
-}
-
-
+// Split a string by tabs
 static std::vector<std::string> splitTabs(const std::string& line) {
     std::vector<std::string> parts;
     std::string token;
@@ -67,6 +27,7 @@ void clearFileIfExists(const std::string& filename) {
     }
 }
 
+// Read key-value style input
 GenericInput readKeyValueInput(const std::string& filename, std::size_t valuesRowIndex) {
     std::ifstream in(filename);
     if (!in) return GenericInput{};
@@ -88,6 +49,7 @@ GenericInput readKeyValueInput(const std::string& filename, std::size_t valuesRo
     return gi;
 }
 
+// Count the number of data rows (excluding header) in a key-value input file
 std::size_t countDataRows(const std::string& filename) {
     std::ifstream in(filename);
     if (!in) return 0;
@@ -108,7 +70,7 @@ std::size_t countDataRows(const std::string& filename) {
     return count;
 }
 
-
+// Write a table to a file
 void writeTable(const std::string& filename,
                 const std::vector<std::string>& names,
                 const std::vector<std::string>& values) {
@@ -175,8 +137,6 @@ void writeTable(const std::string& filename,
     }
     out << "\n";
 }
-
-
 
 
 // Timer class implementation

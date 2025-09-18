@@ -5,7 +5,7 @@
 #include <numeric>
 #include <limits>
 
-// Statistics class implementation
+// Mean implementation
 double Statistics::calculateMean(const std::vector<double>& values) {
     double sum = 0.0;
     for (double value : values) {
@@ -14,6 +14,7 @@ double Statistics::calculateMean(const std::vector<double>& values) {
     return sum / static_cast<double>(values.size());
 }
 
+// Standard deviation implementation
 double Statistics::calculateStdDev(const std::vector<double>& values, double mean) {
     double variance = 0.0;
     for (double value : values) {
@@ -23,6 +24,7 @@ double Statistics::calculateStdDev(const std::vector<double>& values, double mea
     return std::sqrt(variance / static_cast<double>(values.size()));
 }
 
+// Average runtime implementation
 double Statistics::calculateAvgRuntime(const std::vector<double>& runtimes) {
     double totalRuntime = 0.0;
     for (double runtime : runtimes) {
@@ -31,16 +33,18 @@ double Statistics::calculateAvgRuntime(const std::vector<double>& runtimes) {
     return totalRuntime / static_cast<double>(runtimes.size());
 }
 
+// Figure of merit implementation
 double Statistics::calculateFom(double /*mean*/, double stdDev, double avgRuntime) {
     double variance = stdDev * stdDev;
     return 1.0 / (variance * avgRuntime);
 }
 
+// Normal CDF
 static double normalCdf(double z) {
     return 0.5 * (1.0 + std::erf(z / std::sqrt(2.0)));
 }
 
-// Inverse standard normal CDF using Acklam's approximation.
+// Inverse normal CDF using Acklam's approximation
 static double inverseNormalCdf(double p) {
     const double a1 = -3.969683028665376e+01;
     const double a2 =  2.209460984245205e+02;
@@ -98,6 +102,7 @@ static std::vector<double> sampleUniformSubset(const std::vector<double>& values
     return reservoir;
 }
 
+// Shapiro-Francia test statistic
 double Statistics::shapiroFranciaW(const std::vector<double>& values) {
     const std::size_t n = values.size();
     if (n < 5) return std::numeric_limits<double>::quiet_NaN();
@@ -128,6 +133,7 @@ double Statistics::shapiroFranciaW(const std::vector<double>& values) {
     return (lin * lin) / denom;
 }
 
+// Shapiro-Francia p-value
 double Statistics::shapiroFranciaPValue(const std::vector<double>& values) {
     std::size_t n = values.size();
     if (n < 5) return std::numeric_limits<double>::quiet_NaN();
@@ -151,6 +157,7 @@ double Statistics::shapiroFranciaPValue(const std::vector<double>& values) {
     return p;
 }
 
+// Calculate all statistics
 StatisticalResult Statistics::calculateAll(const std::vector<double>& values, const std::vector<double>& runtimes) {
     double mean = calculateMean(values);
     double stdDev = calculateStdDev(values, mean);

@@ -1,0 +1,2 @@
+samples	seed	needle	spacing	pi	runtime_s
+100000	42	1	2	3.14861	0.00339

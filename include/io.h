@@ -8,7 +8,6 @@
 #include <vector>
 #include <stdexcept>
 
-// Specific readers for different app types
 // Generic key-value input
 struct GenericInput {
     std::vector<std::string> names;
@@ -25,36 +24,7 @@ struct GenericInput {
         std::stringstream ss(getString(key)); double v{}; ss >> v; return v;
     }
 };
-struct QuarterCircleInput {
-    std::uint64_t samples;
-    std::uint64_t seed;
-};
 
-struct BuffonInput {
-    std::uint64_t samples;
-    std::uint64_t seed;
-    double needleLength;
-    double lineSpacing;
-};
-
-struct StatQuarterCircleInput {
-    std::uint64_t samples;
-    std::uint64_t seed;
-    std::uint64_t numRuns;
-};
-
-struct StatBuffonInput {
-    std::uint64_t samples;
-    std::uint64_t seed;
-    double needleLength;
-    double lineSpacing;
-    std::uint64_t numRuns;
-};
-
-QuarterCircleInput readQuarterCircleInput(const std::string& filename);
-BuffonInput readBuffonInput(const std::string& filename);
-StatQuarterCircleInput readStatQuarterCircleInput(const std::string& filename);
-StatBuffonInput readStatBuffonInput(const std::string& filename);
 // Read key-value style input: first line = names (tab-separated),
 // subsequent lines = values rows. Select which values row to read
 // with valuesRowIndex (0 = first values row after header).

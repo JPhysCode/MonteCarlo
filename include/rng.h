@@ -2,6 +2,7 @@
 #include <cstdint>
 #include <random>
 
+// Random number generator
 class Random {
 public:
     explicit Random(std::uint64_t seed = 5489u);
