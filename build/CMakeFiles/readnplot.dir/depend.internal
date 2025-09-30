@@ -3,5 +3,6 @@
 
 CMakeFiles/readnplot.dir/apps/readnplot/main.cpp.o
  /home/julian/MonteCarloTransport/apps/readnplot/main.cpp
+ /home/julian/MonteCarloTransport/include/helpers.h
  /home/julian/MonteCarloTransport/include/io.h
  /home/julian/MonteCarloTransport/include/physics.h

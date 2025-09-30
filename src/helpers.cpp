@@ -1,5 +1,7 @@
 #include "helpers.h"
 #include <stdexcept>
+#include <cmath>
+#include <vector>
 
 // Implementation of helper functions for nuclear transport calculations
 
@@ -62,4 +64,62 @@ double interpolatedValue(const MTData& mt_data, double energy) {
     
     // This should never be reached, but just in case
     throw std::runtime_error("Could not find appropriate interpolation points");
+}
+
+// Interpolate cross-section values for an array of energies
+std::vector<double> interpolatedValueS(const MTData& mt_data, const std::vector<double>& energies) {
+    
+    // Create the result vector
+    std::vector<double> result;
+    result.reserve(energies.size());
+    
+    // Interpolate for each energy in the input vector
+    for (double energy : energies) {
+        double interpolated_value = interpolatedValue(mt_data, energy);
+        result.push_back(interpolated_value);
+    }
+    
+    return result;
+}
+
+// Generate n points equidistributed on a log scale between min_val and max_val
+std::vector<double> logSpace(double min_val, double max_val, int n) {
+    
+    // Input validation
+    if (n <= 0) {
+        throw std::runtime_error("Number of points must be positive");
+    }
+    
+    if (min_val <= 0 || max_val <= 0) {
+        throw std::runtime_error("Both min_val and max_val must be positive for log scale");
+    }
+    
+    if (min_val >= max_val) {
+        throw std::runtime_error("min_val must be less than max_val");
+    }
+    
+    // Create the result vector
+    std::vector<double> result;
+    result.reserve(n);
+    
+    // Special case: if n == 1, return the midpoint on log scale
+    if (n == 1) {
+        double log_mid = (std::log10(min_val) + std::log10(max_val)) / 2.0;
+        result.push_back(std::pow(10.0, log_mid));
+        return result;
+    }
+    
+    // Calculate log-spaced points
+    // Formula: x_i = 10^(log10(min) + i * (log10(max) - log10(min)) / (n-1))
+    double log_min = std::log10(min_val);
+    double log_max = std::log10(max_val);
+    double log_step = (log_max - log_min) / (n - 1);
+    
+    for (int i = 0; i < n; ++i) {
+        double log_value = log_min + i * log_step;
+        double linear_value = std::pow(10.0, log_value);
+        result.push_back(linear_value);
+    }
+    
+    return result;
 }

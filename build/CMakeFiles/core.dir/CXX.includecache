@@ -9,6 +9,8 @@
 ../include/helpers.h
 io.h
 ../include/io.h
+vector
+-
 
 ../include/io.h
 cstdint
@@ -39,25 +41,9 @@ helpers.h
 /home/julian/MonteCarloTransport/src/helpers.h
 stdexcept
 -
-
-/home/julian/MonteCarloTransport/src/io.cpp
-io.h
-/home/julian/MonteCarloTransport/src/io.h
-fstream
+cmath
 -
-iostream
--
-chrono
--
-sstream
--
-unordered_map
--
-cstdio
--
-map
--
-cctype
+vector
 -
 
 /home/julian/MonteCarloTransport/src/physics.cpp
