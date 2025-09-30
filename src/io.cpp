@@ -5,6 +5,8 @@
 #include <sstream>
 #include <unordered_map>
 #include <cstdio> // For std::remove
+#include <map>
+#include <cctype>
 
 // Split a string by tabs
 static std::vector<std::string> splitTabs(const std::string& line) {
@@ -169,3 +171,99 @@ void Timer::reset() {
     startTime_ = std::chrono::high_resolution_clock::now();
     endTime_ = startTime_;
 }
+
+// Read nuclear data file and populate NuclearData structure
+NuclearData readNuclearDataFile(const std::string& filename) {
+    std::ifstream file(filename);
+    if (!file.is_open()) {
+        throw std::runtime_error("Could not open file: " + filename);
+    }
+
+    NuclearData data;
+    std::string line;
+
+    // First line: SYM Z A AW T
+    if (!std::getline(file, line)) {
+        throw std::runtime_error("File is empty: " + filename);
+    }
+    {
+        std::istringstream iss(line);
+        iss >> data.symbol >> data.pnumber >> data.mnumber >> data.aweight >> data.temp;
+    }
+
+    // Second line: NNU (number of E,NU pairs below)
+    if (!std::getline(file, line)) {
+        throw std::runtime_error("Missing NNU line in file: " + filename);
+    }
+    int nnu = 0;
+    {
+        std::istringstream nnu_iss(line);
+        nnu_iss >> nnu;
+    }
+
+    // Optional NU function under MT=0
+    if (nnu < 0) nnu = 0;
+    if (nnu > 0) {
+        MTData mt0;
+        mt0.qval = 0.0;
+        mt0.num_ec_pairs = nnu;
+        mt0.efunc.reserve(nnu);
+        for (int i = 0; i < nnu; ++i) {
+            if (!std::getline(file, line)) {
+                throw std::runtime_error("Unexpected EOF while reading NU pairs: " + filename);
+            }
+            std::istringstream ec_iss(line);
+            EnergyCrossSectionPair p{};
+            ec_iss >> p.energy >> p.cross_section;
+            mt0.efunc.push_back(p);
+        }
+        data.mt_data[0] = std::move(mt0);
+    }
+
+    // Remaining blocks: repeated (MT Q NE) followed by NE lines (E XS)
+    while (true) {
+        // Seek next non-empty line (header)
+        do {
+            if (!std::getline(file, line)) {
+                file.close();
+                return data; // EOF reached cleanly
+            }
+            bool only_ws = true;
+            for (char c : line) {
+                if (!std::isspace(static_cast<unsigned char>(c))) { only_ws = false; break; }
+            }
+            if (!only_ws) break;
+        } while (true);
+
+        std::istringstream hdr(line);
+        int mt_number = 0;
+        double qval = 0.0;
+        int ne = 0;
+        if (!(hdr >> mt_number >> qval >> ne)) {
+            break; // malformed header; stop parsing
+        }
+
+        MTData mt_data;
+        mt_data.qval = qval;
+        mt_data.num_ec_pairs = ne;
+        if (ne < 0) ne = 0;
+        mt_data.efunc.reserve(ne);
+
+        for (int i = 0; i < ne; ++i) {
+            if (!std::getline(file, line)) {
+                throw std::runtime_error("Unexpected EOF while reading MT block: " + filename);
+            }
+            std::istringstream ec_iss(line);
+            EnergyCrossSectionPair p{};
+            ec_iss >> p.energy >> p.cross_section;
+            mt_data.efunc.push_back(p);
+        }
+
+        data.mt_data[mt_number] = std::move(mt_data);
+    }
+    
+    file.close();
+    return data;
+}
+
+

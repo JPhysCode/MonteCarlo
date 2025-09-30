@@ -1,2 +1,0 @@
-samples	seed	needle	spacing
-100000	42	1.0	2.0

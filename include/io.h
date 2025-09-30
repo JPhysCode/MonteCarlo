@@ -7,6 +7,7 @@
 #include <chrono>
 #include <vector>
 #include <stdexcept>
+#include <map>
 
 // Generic key-value input
 struct GenericInput {
@@ -86,3 +87,27 @@ void writeTable(const std::string& filename, Rest... rest) {
     detail::collectPairs(names, values, rest...);
     writeTable(filename, names, values);
 }
+
+// Nuclear data structures
+struct EnergyCrossSectionPair {
+    double energy;
+    double cross_section;
+};
+
+struct MTData {
+    double qval;
+    int num_ec_pairs;
+    std::vector<EnergyCrossSectionPair> efunc;
+};
+
+struct NuclearData {
+    std::string symbol;
+    int pnumber;
+    int mnumber;
+    double aweight;
+    double temp;
+    std::map<int, MTData> mt_data; // Key is MT number, value is MTData
+};
+
+// Read nuclear data file and populate NuclearData structure
+NuclearData readNuclearDataFile(const std::string& filename);

@@ -9,29 +9,31 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 add_library(core STATIC
     src/rng.cpp
     src/io.cpp
-    src/quartercircle_pi.cpp
-    src/buffon_pi.cpp
     src/statistics.cpp
+    src/helpers.cpp
+    src/physics.cpp
+    src/capture.cpp
+    src/fission.cpp
+    src/scattering.cpp
 )
 
 target_include_directories(core PUBLIC include)
 
-# Quarter-circle Pi estimator executable
-add_executable(quartercircle apps/quartercircle/main.cpp)
+# Nuclear transport simulation applications
+add_executable(readnplot apps/readnplot/main.cpp)
+target_link_libraries(readnplot PRIVATE core)
 
-target_link_libraries(quartercircle PRIVATE core)
+add_executable(nslowing apps/nslowing/main.cpp)
+target_link_libraries(nslowing PRIVATE core)
 
-# Buffon's Needle executable (stub)
-add_executable(buffonsneedle apps/buffonsneedle/main.cpp)
+add_executable(nmultiplication apps/nmultiplication/main.cpp)
+target_link_libraries(nmultiplication PRIVATE core)
 
-target_link_libraries(buffonsneedle PRIVATE core)
+add_executable(critenrich apps/critenrich/main.cpp)
+target_link_libraries(critenrich PRIVATE core)
 
-# Statistical Quarter-circle Pi estimator executable
-add_executable(stat_quartercircle apps/stat_quartercircle/main.cpp)
+add_executable(timedep apps/timedep/main.cpp)
+target_link_libraries(timedep PRIVATE core)
 
-target_link_libraries(stat_quartercircle PRIVATE core)
-
-# Statistical Buffon's Needle Pi estimator executable
-add_executable(stat_buffonsneedle apps/stat_buffonsneedle/main.cpp)
-
-target_link_libraries(stat_buffonsneedle PRIVATE core)
+add_executable(fourfactor apps/fourfactor/main.cpp)
+target_link_libraries(fourfactor PRIVATE core)

@@ -25,7 +25,7 @@ public:
     // Returns the statistic W' in (0,1]. If the input size n < 5, returns NaN.
     static double shapiroFranciaW(const std::vector<double>& values);
     
-    // Shapiro–Francia p-value using Royston calibration (valid roughly for 5 <= n <= 5000).
+    // Shapiro–Francia p-value using Royston calibration (valid for 5 <= n <= 5000).
     // If n > 5000, computes p-value on a uniform random subsample of size 5000.
     // If n < 5, returns NaN.
     static double shapiroFranciaPValue(const std::vector<double>& values);

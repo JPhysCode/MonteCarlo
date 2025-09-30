@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG CMakeFiles/critenrich.dir/apps/critenrich/main.cpp.o -o critenrich  libcore.a 

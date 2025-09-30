@@ -1,0 +1,1 @@
+/usr/bin/c++ -O3 -DNDEBUG CMakeFiles/fourfactor.dir/apps/fourfactor/main.cpp.o -o fourfactor  libcore.a 

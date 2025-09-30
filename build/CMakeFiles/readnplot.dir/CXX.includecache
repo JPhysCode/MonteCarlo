@@ -1,0 +1,44 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/julian/MonteCarloTransport/apps/readnplot/main.cpp
+iostream
+-
+fstream
+-
+string
+-
+../../include/io.h
+/home/julian/MonteCarloTransport/include/io.h
+../../include/physics.h
+/home/julian/MonteCarloTransport/include/physics.h
+
+/home/julian/MonteCarloTransport/include/io.h
+cstdint
+-
+string
+-
+sstream
+-
+iostream
+-
+fstream
+-
+chrono
+-
+vector
+-
+stdexcept
+-
+map
+-
+
+/home/julian/MonteCarloTransport/include/physics.h
+io.h
+/home/julian/MonteCarloTransport/include/io.h
+
