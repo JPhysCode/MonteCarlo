@@ -19,13 +19,13 @@ CMakeFiles/core.dir/src/physics.cpp.o
  ../include/io.h
  ../include/physics.h
  /home/julian/MonteCarloTransport/src/physics.cpp
-CMakeFiles/core.dir/src/rng.cpp.o
- ../include/rng.h
- /home/julian/MonteCarloTransport/src/rng.cpp
+CMakeFiles/core.dir/src/random_sampling.cpp.o
+ ../include/random_sampling.h
+ /home/julian/MonteCarloTransport/src/random_sampling.cpp
 CMakeFiles/core.dir/src/scattering.cpp.o
  ../include/scattering.h
  /home/julian/MonteCarloTransport/src/scattering.cpp
 CMakeFiles/core.dir/src/statistics.cpp.o
- ../include/rng.h
+ ../include/random_sampling.h
  ../include/statistics.h
  /home/julian/MonteCarloTransport/src/statistics.cpp

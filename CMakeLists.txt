@@ -7,7 +7,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 # Core library with reusable components
 add_library(core STATIC
-    src/rng.cpp
+    src/random_sampling.cpp
     src/io.cpp
     src/statistics.cpp
     src/helpers.cpp

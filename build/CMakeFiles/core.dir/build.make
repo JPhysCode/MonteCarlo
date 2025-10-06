@@ -76,18 +76,18 @@ include CMakeFiles/core.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/core.dir/flags.make
 
-CMakeFiles/core.dir/src/rng.cpp.o: CMakeFiles/core.dir/flags.make
-CMakeFiles/core.dir/src/rng.cpp.o: ../src/rng.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/julian/MonteCarloTransport/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/core.dir/src/rng.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/core.dir/src/rng.cpp.o -c /home/julian/MonteCarloTransport/src/rng.cpp
+CMakeFiles/core.dir/src/random_sampling.cpp.o: CMakeFiles/core.dir/flags.make
+CMakeFiles/core.dir/src/random_sampling.cpp.o: ../src/random_sampling.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/julian/MonteCarloTransport/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/core.dir/src/random_sampling.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/core.dir/src/random_sampling.cpp.o -c /home/julian/MonteCarloTransport/src/random_sampling.cpp
 
-CMakeFiles/core.dir/src/rng.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/core.dir/src/rng.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/julian/MonteCarloTransport/src/rng.cpp > CMakeFiles/core.dir/src/rng.cpp.i
+CMakeFiles/core.dir/src/random_sampling.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/core.dir/src/random_sampling.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/julian/MonteCarloTransport/src/random_sampling.cpp > CMakeFiles/core.dir/src/random_sampling.cpp.i
 
-CMakeFiles/core.dir/src/rng.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/core.dir/src/rng.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/julian/MonteCarloTransport/src/rng.cpp -o CMakeFiles/core.dir/src/rng.cpp.s
+CMakeFiles/core.dir/src/random_sampling.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/core.dir/src/random_sampling.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/julian/MonteCarloTransport/src/random_sampling.cpp -o CMakeFiles/core.dir/src/random_sampling.cpp.s
 
 CMakeFiles/core.dir/src/io.cpp.o: CMakeFiles/core.dir/flags.make
 CMakeFiles/core.dir/src/io.cpp.o: ../src/io.cpp
@@ -182,7 +182,7 @@ CMakeFiles/core.dir/src/scattering.cpp.s: cmake_force
 
 # Object files for target core
 core_OBJECTS = \
-"CMakeFiles/core.dir/src/rng.cpp.o" \
+"CMakeFiles/core.dir/src/random_sampling.cpp.o" \
 "CMakeFiles/core.dir/src/io.cpp.o" \
 "CMakeFiles/core.dir/src/statistics.cpp.o" \
 "CMakeFiles/core.dir/src/helpers.cpp.o" \
@@ -194,7 +194,7 @@ core_OBJECTS = \
 # External object files for target core
 core_EXTERNAL_OBJECTS =
 
-libcore.a: CMakeFiles/core.dir/src/rng.cpp.o
+libcore.a: CMakeFiles/core.dir/src/random_sampling.cpp.o
 libcore.a: CMakeFiles/core.dir/src/io.cpp.o
 libcore.a: CMakeFiles/core.dir/src/statistics.cpp.o
 libcore.a: CMakeFiles/core.dir/src/helpers.cpp.o

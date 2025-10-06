@@ -38,6 +38,10 @@ double calculateCompoundMolarMass(const Compound& compound);
 // Stores results in the atom_number_densities array of each substance
 void calculateAtomNumberDensities(Compound& compound);
 
+// Calculate macroscopic cross section for an individual species
+// Takes nuclear data and atom number density, returns macroscopic cross section (cm⁻¹)
+MTData calculateSpeciesMacroscopicCrossSection(const NuclearData& species_data, double atom_number_density);
+
 // Calculate total macroscopic cross section for a compound
 // Computes atom number densities and sums weighted microscopic cross sections
 // Returns MTData containing energy-dependent macroscopic cross section (cm⁻¹)

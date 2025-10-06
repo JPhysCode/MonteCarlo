@@ -4,7 +4,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/core.dir/src/helpers.cpp.o"
   "CMakeFiles/core.dir/src/io.cpp.o"
   "CMakeFiles/core.dir/src/physics.cpp.o"
-  "CMakeFiles/core.dir/src/rng.cpp.o"
+  "CMakeFiles/core.dir/src/random_sampling.cpp.o"
   "CMakeFiles/core.dir/src/scattering.cpp.o"
   "CMakeFiles/core.dir/src/statistics.cpp.o"
   "libcore.a"

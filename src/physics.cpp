@@ -78,6 +78,37 @@ void calculateAtomNumberDensities(Compound& compound) {
     }
 }
 
+// Calculate macroscopic cross section for an individual species
+MTData calculateSpeciesMacroscopicCrossSection(const NuclearData& species_data, double atom_number_density) {
+    // Calculate total cross section (MT1) for this species
+    NuclearData species_copy = species_data;  // Make a copy to avoid modifying original
+    calculateTotalCrossSection(species_copy);
+    
+    // Get the total cross section (MT1) for this species
+    auto mt1_it = species_copy.mt_data.find(1);
+    if (mt1_it == species_copy.mt_data.end()) {
+        throw std::runtime_error("Failed to calculate MT1 (total cross section) for species " + species_data.symbol);
+    }
+    
+    const MTData& mt1_data = mt1_it->second;
+    
+    // Create macroscopic MTData by multiplying cross sections by atom number density
+    MTData macroscopic_mt;
+    macroscopic_mt.qval = mt1_data.qval;
+    macroscopic_mt.num_ec_pairs = mt1_data.num_ec_pairs;
+    macroscopic_mt.efunc.reserve(mt1_data.efunc.size());
+    
+    // Multiply each energy-cross section pair by atom number density
+    for (const auto& energy_point : mt1_data.efunc) {
+        EnergyCrossSectionPair macroscopic_point;
+        macroscopic_point.energy = energy_point.energy;
+        macroscopic_point.cross_section = energy_point.cross_section * atom_number_density;
+        macroscopic_mt.efunc.push_back(macroscopic_point);
+    }
+    
+    return macroscopic_mt;
+}
+
 // Calculate total macroscopic cross section for a compound
 MTData calculateTotalMacroscopicCrossSection(const Compound& compound) {
     // Create a mutable copy of the compound to calculate atom number densities
@@ -97,33 +128,10 @@ MTData calculateTotalMacroscopicCrossSection(const Compound& compound) {
             const NuclearData& species_data = substance.species[j];
             double atom_number_density = substance.atom_number_densities[j];
             
-            // Calculate total cross section (MT1) for this species
-            NuclearData species_copy = species_data;  // Make a copy to avoid modifying original
-            calculateTotalCrossSection(species_copy);
+            // Calculate macroscopic cross section for this species
+            MTData species_macroscopic = calculateSpeciesMacroscopicCrossSection(species_data, atom_number_density);
             
-            // Get the total cross section (MT1) for this species
-            auto mt1_it = species_copy.mt_data.find(1);
-            if (mt1_it == species_copy.mt_data.end()) {
-                throw std::runtime_error("Failed to calculate MT1 (total cross section) for species " + species_data.symbol);
-            }
-            
-            const MTData& mt1_data = mt1_it->second;
-            
-            // Create weighted MTData by multiplying cross sections by atom number density
-            MTData weighted_mt;
-            weighted_mt.qval = mt1_data.qval;
-            weighted_mt.num_ec_pairs = mt1_data.num_ec_pairs;
-            weighted_mt.efunc.reserve(mt1_data.efunc.size());
-            
-            // Weight each energy-cross section pair by atom number density
-            for (const auto& energy_point : mt1_data.efunc) {
-                EnergyCrossSectionPair weighted_point;
-                weighted_point.energy = energy_point.energy;
-                weighted_point.cross_section = energy_point.cross_section * atom_number_density;
-                weighted_mt.efunc.push_back(weighted_point);
-            }
-            
-            weighted_mt_data.push_back(weighted_mt);
+            weighted_mt_data.push_back(species_macroscopic);
         }
     }
     

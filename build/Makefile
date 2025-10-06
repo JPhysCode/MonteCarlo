@@ -517,32 +517,32 @@ src/physics.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/core.dir/build.make CMakeFiles/core.dir/src/physics.cpp.s
 .PHONY : src/physics.cpp.s
 
-src/rng.o: src/rng.cpp.o
+src/random_sampling.o: src/random_sampling.cpp.o
 
-.PHONY : src/rng.o
+.PHONY : src/random_sampling.o
 
 # target to build an object file
-src/rng.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/core.dir/build.make CMakeFiles/core.dir/src/rng.cpp.o
-.PHONY : src/rng.cpp.o
+src/random_sampling.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/core.dir/build.make CMakeFiles/core.dir/src/random_sampling.cpp.o
+.PHONY : src/random_sampling.cpp.o
 
-src/rng.i: src/rng.cpp.i
+src/random_sampling.i: src/random_sampling.cpp.i
 
-.PHONY : src/rng.i
+.PHONY : src/random_sampling.i
 
 # target to preprocess a source file
-src/rng.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/core.dir/build.make CMakeFiles/core.dir/src/rng.cpp.i
-.PHONY : src/rng.cpp.i
+src/random_sampling.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/core.dir/build.make CMakeFiles/core.dir/src/random_sampling.cpp.i
+.PHONY : src/random_sampling.cpp.i
 
-src/rng.s: src/rng.cpp.s
+src/random_sampling.s: src/random_sampling.cpp.s
 
-.PHONY : src/rng.s
+.PHONY : src/random_sampling.s
 
 # target to generate assembly for a file
-src/rng.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/core.dir/build.make CMakeFiles/core.dir/src/rng.cpp.s
-.PHONY : src/rng.cpp.s
+src/random_sampling.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/core.dir/build.make CMakeFiles/core.dir/src/random_sampling.cpp.s
+.PHONY : src/random_sampling.cpp.s
 
 src/scattering.o: src/scattering.cpp.o
 
@@ -646,9 +646,9 @@ help:
 	@echo "... src/physics.o"
 	@echo "... src/physics.i"
 	@echo "... src/physics.s"
-	@echo "... src/rng.o"
-	@echo "... src/rng.i"
-	@echo "... src/rng.s"
+	@echo "... src/random_sampling.o"
+	@echo "... src/random_sampling.i"
+	@echo "... src/random_sampling.s"
 	@echo "... src/scattering.o"
 	@echo "... src/scattering.i"
 	@echo "... src/scattering.s"

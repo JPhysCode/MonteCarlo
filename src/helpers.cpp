@@ -123,3 +123,46 @@ std::vector<double> logSpace(double min_val, double max_val, int n) {
     
     return result;
 }
+
+// Interpolate all MT values at a specific energy for given nuclear data
+NuclearData NuclearDataAtEnergy(const NuclearData& nuclear_data, double energy) {
+    // Create a copy of the nuclear data with the same basic properties
+    NuclearData result_data;
+    result_data.symbol = nuclear_data.symbol;
+    result_data.pnumber = nuclear_data.pnumber;
+    result_data.mnumber = nuclear_data.mnumber;
+    result_data.aweight = nuclear_data.aweight;
+    result_data.temp = nuclear_data.temp;
+    
+    // Interpolate each MT value at the given energy
+    for (const auto& mt_pair : nuclear_data.mt_data) {
+        int mt_number = mt_pair.first;
+        const MTData& mt_data = mt_pair.second;
+        
+        try {
+            // Get the interpolated cross section value at the given energy
+            double interpolated_cross_section = interpolatedValue(mt_data, energy);
+            
+            // Create a single-point MTData with the interpolated value
+            MTData single_point_mt;
+            single_point_mt.qval = mt_data.qval;
+            single_point_mt.num_ec_pairs = 1;
+            
+            // Create the single energy-cross section pair
+            EnergyCrossSectionPair single_point;
+            single_point.energy = energy;
+            single_point.cross_section = interpolated_cross_section;
+            single_point_mt.efunc.push_back(single_point);
+            
+            // Store the interpolated MT data
+            result_data.mt_data[mt_number] = single_point_mt;
+            
+        } catch (const std::exception& e) {
+            // Skip MT values that cannot be interpolated at this energy
+            // This allows the function to continue with other MT values
+            continue;
+        }
+    }
+    
+    return result_data;
+}

@@ -1,5 +1,5 @@
 #include "statistics.h"
-#include "rng.h"
+#include "random_sampling.h"
 #include <cmath>
 #include <algorithm>
 #include <numeric>

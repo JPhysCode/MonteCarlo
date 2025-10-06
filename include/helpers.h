@@ -25,4 +25,8 @@ std::vector<double> interpolatedValueS(const MTData& mt_data, const std::vector<
 // Returns a vector of n values where each value is log-distributed
 std::vector<double> logSpace(double min_val, double max_val, int n);
 
+// Interpolate all MT values at a specific energy for given nuclear data
+// Returns NuclearData with single-point MTData containing the interpolated values at the given energy
+NuclearData interpolateNuclearDataAtEnergy(const NuclearData& nuclear_data, double energy);
+
 #endif // HELPERS_H
