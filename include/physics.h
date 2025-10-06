@@ -25,6 +25,19 @@ struct Compound {
     Compound(double compound_density = 0.0) : density(compound_density) {}
 };
 
+// Neutron structure for Monte Carlo transport simulations
+struct Neutron {
+    double energy;          // Neutron energy (eV)
+    double direction_x;     // X-component of direction vector
+    double direction_y;     // Y-component of direction vector
+    double direction_z;     // Z-component of direction vector
+    bool captured;          // Whether the neutron has been captured
+    
+    // Constructor
+    Neutron(double neutron_energy = 0.0, double dx = 0.0, double dy = 0.0, double dz = 0.0, bool is_captured = false) 
+        : energy(neutron_energy), direction_x(dx), direction_y(dy), direction_z(dz), captured(is_captured) {}
+};
+
 // Calculate molar mass of a substance using atomic weights from nuclear data
 // Returns molar mass in g/mol
 double calculateSubstanceMolarMass(const Substance& substance);

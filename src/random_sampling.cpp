@@ -2,6 +2,7 @@
 #include "helpers.h"
 #include "physics.h"
 #include <stdexcept>
+#include <cmath>
 
 // Constructor
 Random::Random(std::uint64_t seed) : engine_(seed) {}
@@ -160,4 +161,33 @@ double reactionSampling(Random& rng, const NuclearData& nuclear_data) {
     const MTData& selected_mt_data = nuclear_data.mt_data.at(selected_mt);
     
     return selected_mt_data.qval;
+}
+
+// Sample energy from a Maxwellian distribution
+double maxwellianSampling(Random& rng, double T) {
+    // Input validation
+    if (T <= 0.0) {
+        throw std::runtime_error("Nuclear temperature T must be positive");
+    }
+    
+    double xi1, xi2, R;
+    
+    do {
+        // Sample two random numbers on the unit interval
+        xi1 = rng.uniform01();
+        xi2 = rng.uniform01();
+        
+        // Calculate R = xi1^2 + xi2^2
+        R = xi1 * xi1 + xi2 * xi2;
+        
+    } while (R > 1.0);  // Continue until we're inside the unit circle
+    
+    // Sample two more random numbers on the unit interval
+    double xi3 = rng.uniform01();
+    double xi4 = rng.uniform01();
+    
+    // Calculate final energy using the Maxwellian sampling formula
+    double E = -T * (xi1 * xi1 * std::log(xi3) / R + std::log(xi4));
+    
+    return E;  // Energy sampled from Maxwellian distribution
 }

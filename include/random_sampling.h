@@ -29,3 +29,8 @@ NuclearData targetSampling(Random& rng, const Compound& compound, double energy)
 // Input nuclear data must already be boiled down to a single energy point
 // Returns the Q-value of the selected reaction
 double reactionSampling(Random& rng, const NuclearData& nuclear_data);
+
+// Sample energy from a Maxwellian distribution
+// T is the nuclear temperature parameter
+// Returns energy sampled from Maxwellian distribution (eV)
+double maxwellianSampling(Random& rng, double T);
