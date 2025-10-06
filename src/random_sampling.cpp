@@ -107,3 +107,57 @@ NuclearData targetSampling(Random& rng, const Compound& compound, double energy)
     // Return the nuclear data of the selected target species
     return all_species[selected_index];
 }
+
+// Sample a nuclear reaction (MT channel) for a species
+double reactionSampling(Random& rng, const NuclearData& nuclear_data) {
+    // Validate that nuclear data is boiled down to a single energy point
+    for (const auto& mt_pair : nuclear_data.mt_data) {
+        const MTData& mt_data = mt_pair.second;
+        if (mt_data.efunc.size() != 1) {
+            throw std::runtime_error("Nuclear data must be boiled down to a single energy point. MT" + 
+                                   std::to_string(mt_pair.first) + " has " + 
+                                   std::to_string(mt_data.efunc.size()) + " energy points");
+        }
+    }
+    
+    // Collect cross section values for all MT channels (excluding MT0)
+    std::vector<double> cross_sections;
+    std::vector<int> mt_numbers;
+    
+    // Iterate through all MT data
+    for (const auto& mt_pair : nuclear_data.mt_data) {
+        int mt_number = mt_pair.first;
+        
+        // Skip MT0 (total cross section)
+        if (mt_number == 0) {
+            continue;
+        }
+        
+        const MTData& mt_data = mt_pair.second;
+        
+        // Get the cross section value (should be single-point MTData)
+        if (mt_data.efunc.empty()) {
+            continue; // Skip if no data available
+        }
+        
+        double cross_section = mt_data.efunc[0].cross_section;
+        
+        // Store the cross section and MT number
+        cross_sections.push_back(cross_section);
+        mt_numbers.push_back(mt_number);
+    }
+    
+    // Check if we found any reaction channels
+    if (cross_sections.empty()) {
+        throw std::runtime_error("No reaction channels found for species " + nuclear_data.symbol);
+    }
+    
+    // Use interval sampling to select a reaction based on cross section weights
+    int selected_index = intervalSampling(rng, cross_sections);
+    
+    // Get the Q-value of the selected reaction
+    int selected_mt = mt_numbers[selected_index];
+    const MTData& selected_mt_data = nuclear_data.mt_data.at(selected_mt);
+    
+    return selected_mt_data.qval;
+}

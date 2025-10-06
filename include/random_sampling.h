@@ -23,3 +23,9 @@ int intervalSampling(Random& rng, const std::vector<double>& interval_sizes);
 // Uses macroscopic cross sections as weights for species selection
 // Returns the nuclear data of the selected target species
 NuclearData targetSampling(Random& rng, const Compound& compound, double energy);
+
+// Sample a nuclear reaction (MT channel) for a species
+// Uses cross section values as weights for reaction selection
+// Input nuclear data must already be boiled down to a single energy point
+// Returns the Q-value of the selected reaction
+double reactionSampling(Random& rng, const NuclearData& nuclear_data);
