@@ -6,6 +6,18 @@
 
 #IncludeRegexTransform: 
 
+../include/capture.h
+physics.h
+../include/physics.h
+
+../include/fission.h
+physics.h
+../include/physics.h
+random_sampling.h
+../include/random_sampling.h
+vector
+-
+
 ../include/helpers.h
 io.h
 ../include/io.h
@@ -43,6 +55,14 @@ random
 -
 vector
 -
+physics.h
+../include/physics.h
+
+../include/scattering.h
+physics.h
+../include/physics.h
+random_sampling.h
+../include/random_sampling.h
 
 ../include/statistics.h
 vector
@@ -50,11 +70,35 @@ vector
 cstdint
 -
 
+/home/julian/MonteCarloTransport/src/capture.cpp
+capture.h
+/home/julian/MonteCarloTransport/src/capture.h
+
+/home/julian/MonteCarloTransport/src/fission.cpp
+fission.h
+/home/julian/MonteCarloTransport/src/fission.h
+capture.h
+/home/julian/MonteCarloTransport/src/capture.h
+helpers.h
+/home/julian/MonteCarloTransport/src/helpers.h
+cmath
+-
+stdexcept
+-
+
 /home/julian/MonteCarloTransport/src/physics.cpp
 physics.h
 /home/julian/MonteCarloTransport/src/physics.h
 helpers.h
 /home/julian/MonteCarloTransport/src/helpers.h
+random_sampling.h
+/home/julian/MonteCarloTransport/src/random_sampling.h
+capture.h
+/home/julian/MonteCarloTransport/src/capture.h
+fission.h
+/home/julian/MonteCarloTransport/src/fission.h
+scattering.h
+/home/julian/MonteCarloTransport/src/scattering.h
 algorithm
 -
 stdexcept
@@ -63,6 +107,22 @@ stdexcept
 /home/julian/MonteCarloTransport/src/random_sampling.cpp
 random_sampling.h
 /home/julian/MonteCarloTransport/src/random_sampling.h
+helpers.h
+/home/julian/MonteCarloTransport/src/helpers.h
+physics.h
+/home/julian/MonteCarloTransport/src/physics.h
+stdexcept
+-
+cmath
+-
+
+/home/julian/MonteCarloTransport/src/scattering.cpp
+scattering.h
+/home/julian/MonteCarloTransport/src/scattering.h
+helpers.h
+/home/julian/MonteCarloTransport/src/helpers.h
+cmath
+-
 stdexcept
 -
 

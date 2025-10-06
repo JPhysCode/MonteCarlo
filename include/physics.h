@@ -3,6 +3,9 @@
 
 #include "io.h"
 
+// Forward declaration
+class Random;
+
 // Physics constants and calculations for nuclear transport
 
 // Substance structure: contains nuclear data for species and their stoichiometric coefficients

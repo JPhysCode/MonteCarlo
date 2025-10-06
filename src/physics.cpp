@@ -180,7 +180,7 @@ void processNeutronCollision(std::vector<Neutron>& neutrons, const Compound& com
             elasticScattering(selected_neutron, target_species, rng);
             break;
             
-        case 16:
+        //case 16:
         case 18:
             // Fission - generate new neutrons and append to array
             {
