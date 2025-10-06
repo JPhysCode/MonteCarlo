@@ -31,6 +31,15 @@ NuclearData targetSampling(Random& rng, const Compound& compound, double energy)
 double reactionSampling(Random& rng, const NuclearData& nuclear_data);
 
 // Sample energy from a Maxwellian distribution
-// T is the nuclear temperature parameter
+// T is the nuclear temperature parameter (eV, default: 1.2895 MeV)
 // Returns energy sampled from Maxwellian distribution (eV)
-double maxwellianSampling(Random& rng, double T);
+double maxwellianSampling(Random& rng, double T = 1.2895e6);
+
+// Sample a random direction vector uniformly distributed on the unit sphere
+// Returns a vector with three components (x, y, z) representing the direction
+std::vector<double> sampleRandomDirection(Random& rng);
+
+// Sample a new neutron with random direction and Maxwellian energy distribution
+// Returns a Neutron struct with random direction and energy sampled from Maxwellian distribution
+// The captured field is set to false
+Neutron sampleNewNeutron(Random& rng, double T = 1.2895e6);

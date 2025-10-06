@@ -191,3 +191,39 @@ double maxwellianSampling(Random& rng, double T) {
     
     return E;  // Energy sampled from Maxwellian distribution
 }
+
+// Sample a random direction vector uniformly distributed on the unit sphere
+std::vector<double> sampleRandomDirection(Random& rng) {
+    // Generate two random numbers
+    double xi1 = rng.uniform01();
+    double xi2 = rng.uniform01();
+    
+    // Generate random angles
+    double theta = 2.0 * M_PI * xi1;        // Azimuthal angle [0, 2π)
+    double phi = std::acos(1.0 - 2.0 * xi2); // Polar angle [0, π]
+    
+    // Convert spherical to Cartesian coordinates
+    double x = std::sin(phi) * std::cos(theta);
+    double y = std::sin(phi) * std::sin(theta);
+    double z = std::cos(phi);
+    
+    // Return direction vector
+    return {x, y, z};
+}
+
+// Sample a new neutron with random direction and Maxwellian energy distribution
+Neutron sampleNewNeutron(Random& rng, double T) {
+    // Input validation
+    if (T <= 0.0) {
+        throw std::runtime_error("Nuclear temperature T must be positive");
+    }
+    
+    // Sample random direction
+    std::vector<double> direction = sampleRandomDirection(rng);
+    
+    // Sample energy from Maxwellian distribution
+    double energy = maxwellianSampling(rng, T);
+    
+    // Create and return neutron with captured = false
+    return Neutron(energy, direction[0], direction[1], direction[2], false);
+}
