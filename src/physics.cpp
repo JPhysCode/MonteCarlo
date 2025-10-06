@@ -3,7 +3,138 @@
 #include <algorithm>
 #include <stdexcept>
 
+// Avogadro's number (atoms/mol)
+const double AVOGADRO_NUMBER = 6.02214076e23;
+
 // Implementation of physics constants and calculations for nuclear transport
+
+// Calculate molar mass of a substance using atomic weights from nuclear data
+double calculateSubstanceMolarMass(const Substance& substance) {
+    double total_molar_mass = 0.0;
+    
+    // Check that species and stoichiometric coefficients arrays have the same size
+    if (substance.species.size() != substance.stoichiometric_coeffs.size()) {
+        throw std::runtime_error("Species and stoichiometric coefficients arrays must have the same size");
+    }
+    
+    // Calculate molar mass by summing (atomic_weight * stoichiometric_coefficient) for each species
+    for (size_t i = 0; i < substance.species.size(); ++i) {
+        double atomic_weight = substance.species[i].aweight;
+        int stoichiometric_coeff = substance.stoichiometric_coeffs[i];
+        
+        total_molar_mass += atomic_weight * stoichiometric_coeff;
+    }
+    
+    return total_molar_mass; // Returns molar mass in g/mol
+}
+
+// Calculate mean molar mass of a compound using substance molar masses and molar fractions
+double calculateCompoundMolarMass(const Compound& compound) {
+    double mean_molar_mass = 0.0;
+    
+    // Check that substances and molar fractions arrays have the same size
+    if (compound.substances.size() != compound.molar_fractions.size()) {
+        throw std::runtime_error("Substances and molar fractions arrays must have the same size");
+    }
+    
+    // Calculate mean molar mass by summing (substance_molar_mass * molar_fraction) for each substance
+    for (size_t i = 0; i < compound.substances.size(); ++i) {
+        double substance_molar_mass = calculateSubstanceMolarMass(compound.substances[i]);
+        double molar_fraction = compound.molar_fractions[i];
+        
+        mean_molar_mass += substance_molar_mass * molar_fraction;
+    }
+    
+    return mean_molar_mass; // Returns mean molar mass in g/mol
+}
+
+// Calculate atom number densities for all species in all substances of a compound
+void calculateAtomNumberDensities(Compound& compound) {
+    // Calculate the mean molar mass of the compound
+    double mean_molar_mass = calculateCompoundMolarMass(compound);
+    
+    // Calculate the total molar density of the compound (mol/cm³)
+    double molar_density = compound.density / mean_molar_mass;
+    
+    // Iterate through each substance in the compound
+    for (size_t i = 0; i < compound.substances.size(); ++i) {
+        Substance& substance = compound.substances[i];
+        double molar_fraction = compound.molar_fractions[i];
+        
+        // Calculate the molar density of this substance (mol/cm³)
+        double substance_molar_density = molar_density * molar_fraction;
+        
+        // Clear and resize the atom number densities array
+        substance.atom_number_densities.clear();
+        substance.atom_number_densities.resize(substance.species.size());
+        
+        // Calculate atom number density for each species in this substance
+        for (size_t j = 0; j < substance.species.size(); ++j) {
+            int stoichiometric_coeff = substance.stoichiometric_coeffs[j];
+            
+            // Atom number density = substance_molar_density * stoichiometric_coefficient * Avogadro_number
+            substance.atom_number_densities[j] = substance_molar_density * stoichiometric_coeff * AVOGADRO_NUMBER;
+        }
+    }
+}
+
+// Calculate total macroscopic cross section for a compound
+MTData calculateTotalMacroscopicCrossSection(const Compound& compound) {
+    // Create a mutable copy of the compound to calculate atom number densities
+    Compound compound_copy = compound;
+    
+    // Calculate atom number densities for all species
+    calculateAtomNumberDensities(compound_copy);
+    
+    std::vector<MTData> weighted_mt_data;
+    
+    // Iterate through each substance in the compound
+    for (size_t i = 0; i < compound_copy.substances.size(); ++i) {
+        const Substance& substance = compound_copy.substances[i];
+        
+        // Iterate through each species in the substance
+        for (size_t j = 0; j < substance.species.size(); ++j) {
+            const NuclearData& species_data = substance.species[j];
+            double atom_number_density = substance.atom_number_densities[j];
+            
+            // Calculate total cross section (MT1) for this species
+            NuclearData species_copy = species_data;  // Make a copy to avoid modifying original
+            calculateTotalCrossSection(species_copy);
+            
+            // Get the total cross section (MT1) for this species
+            auto mt1_it = species_copy.mt_data.find(1);
+            if (mt1_it == species_copy.mt_data.end()) {
+                throw std::runtime_error("Failed to calculate MT1 (total cross section) for species " + species_data.symbol);
+            }
+            
+            const MTData& mt1_data = mt1_it->second;
+            
+            // Create weighted MTData by multiplying cross sections by atom number density
+            MTData weighted_mt;
+            weighted_mt.qval = mt1_data.qval;
+            weighted_mt.num_ec_pairs = mt1_data.num_ec_pairs;
+            weighted_mt.efunc.reserve(mt1_data.efunc.size());
+            
+            // Weight each energy-cross section pair by atom number density
+            for (const auto& energy_point : mt1_data.efunc) {
+                EnergyCrossSectionPair weighted_point;
+                weighted_point.energy = energy_point.energy;
+                weighted_point.cross_section = energy_point.cross_section * atom_number_density;
+                weighted_mt.efunc.push_back(weighted_point);
+            }
+            
+            weighted_mt_data.push_back(weighted_mt);
+        }
+    }
+    
+    // Check if we found any MT data
+    if (weighted_mt_data.empty()) {
+        throw std::runtime_error("No MT data found in compound for macroscopic cross section calculation");
+    }
+    
+    // Sum all weighted MT data to get total macroscopic cross section
+    return sumMTData(weighted_mt_data);
+}
 
 // Generic function to sum multiple MTData objects
 MTData sumMTData(const std::vector<MTData>& mt_data_array) {

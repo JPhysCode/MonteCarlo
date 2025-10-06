@@ -36,6 +36,16 @@ map
 io.h
 ../include/io.h
 
+/home/julian/MonteCarloTransport/src/helpers.cpp
+helpers.h
+/home/julian/MonteCarloTransport/src/helpers.h
+stdexcept
+-
+cmath
+-
+vector
+-
+
 /home/julian/MonteCarloTransport/src/physics.cpp
 physics.h
 /home/julian/MonteCarloTransport/src/physics.h
