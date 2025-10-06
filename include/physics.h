@@ -68,6 +68,12 @@ MTData calculateTotalMacroscopicCrossSection(const Compound& compound);
 // Updates neutron array based on reaction type (scattering, capture, fission)
 void processNeutronCollision(std::vector<Neutron>& neutrons, const Compound& compound, Random& rng);
 
+// Function to simulate single neutron energy evolution
+std::vector<double> energyOfSingleNeutron(const Neutron& initial_neutron, const Compound& compound, Random& rng, int max_steps);
+
+// Function to compute average energy evolution over multiple simulations
+std::vector<double> averageEnergyOfSingleNeutron(const Neutron& initial_neutron, const Compound& compound, int num_runs, int max_steps);
+
 // Generic function to sum multiple MTData objects
 // Finds the MTData with most energy points, uses its energy grid as base
 // Interpolates all other MTData onto this grid and sums them up

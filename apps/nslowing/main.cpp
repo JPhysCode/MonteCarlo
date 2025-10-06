@@ -4,97 +4,13 @@
 #include <numeric>
 #include "../../include/physics.h"
 #include "../../include/random_sampling.h"
-
-// Function to run simulations for a given compound
-std::vector<double> runSimulations(const Compound& compound, const std::string& isotope_name, int num_runs, int max_steps) {
-    std::cout << "Running " << num_runs << " simulations for " << isotope_name << "..." << std::endl;
-    
-    // Store all energy histories
-    std::vector<std::vector<double>> all_energy_histories;
-    std::vector<int> run_step_counts;
-    
-    // Run multiple simulations
-    for (int run = 0; run < num_runs; ++run) {
-        if ((run + 1) % 50 == 0) {
-            std::cout << "Completed " << (run + 1) << " runs for " << isotope_name << "..." << std::endl;
-        }
-        
-        // Create random number generator with different seed for each run
-        Random rng(12345 + run);
-        
-        // Create neutron array with one 2 MeV neutron
-        std::vector<Neutron> neutrons;
-        
-        // Create initial neutron with exactly 2 MeV energy and random direction
-        std::vector<double> random_direction = sampleRandomDirection(rng);
-        Neutron initial_neutron(2.0e6, random_direction[0], random_direction[1], random_direction[2], false);  // 2 MeV
-        neutrons.push_back(initial_neutron);
-        
-        // Array to track energy at each step for this run
-        std::vector<double> energy_history;
-        energy_history.push_back(neutrons[0].energy);  // Initial energy
-        
-        int step_count = 0;
-        
-        // Process collisions until the first neutron is captured or max steps reached
-        while (!neutrons[0].captured && step_count < max_steps) {
-            step_count++;
-            
-            // Process neutron collision
-            processNeutronCollision(neutrons, compound, rng);
-            
-            // Record energy of the first neutron
-            energy_history.push_back(neutrons[0].energy);
-        }
-        
-        // Store this run's data
-        all_energy_histories.push_back(energy_history);
-        run_step_counts.push_back(step_count);
-    }
-    
-    std::cout << "All " << isotope_name << " simulations completed!" << std::endl;
-    
-    // Find the maximum number of steps across all runs
-    int max_steps_actual = *std::max_element(run_step_counts.begin(), run_step_counts.end());
-    std::cout << "Maximum steps in any " << isotope_name << " run: " << max_steps_actual << std::endl;
-    
-    // Compute average energy array
-    std::vector<double> average_energy_history;
-    
-    for (int step = 0; step <= max_steps_actual; ++step) {
-        double energy_sum = 0.0;
-        int valid_runs = 0;
-        
-        // Sum energies from all runs that have data for this step
-        for (size_t run = 0; run < all_energy_histories.size(); ++run) {
-            if (step < static_cast<int>(all_energy_histories[run].size())) {
-                energy_sum += all_energy_histories[run][step];
-                valid_runs++;
-            }
-        }
-        
-        // Compute average energy for this step
-        double average_energy = (valid_runs > 0) ? energy_sum / valid_runs : 0.0;
-        average_energy_history.push_back(average_energy);
-    }
-    
-    std::cout << "Average " << isotope_name << " energy history computed with " << average_energy_history.size() << " steps" << std::endl;
-    
-    // Print statistics
-    std::cout << "\n" << isotope_name << " Simulation Statistics:" << std::endl;
-    std::cout << "Total runs: " << num_runs << std::endl;
-    std::cout << "Average steps per run: " << std::accumulate(run_step_counts.begin(), run_step_counts.end(), 0) / num_runs << std::endl;
-    std::cout << "Min steps in a run: " << *std::min_element(run_step_counts.begin(), run_step_counts.end()) << std::endl;
-    std::cout << "Max steps in a run: " << max_steps_actual << std::endl;
-    
-    return average_energy_history;
-}
+#include "../../include/helpers.h"
 
 int main() {
     std::cout << "Neutron Slowing Down Application - H1 vs H2 Comparison" << std::endl;
     
     try {
-        const int NUM_RUNS = 1000;
+        const int NUM_RUNS = 2000;
         const int MAX_STEPS = 80;  
         
         // Create H1 compound
@@ -117,11 +33,24 @@ int main() {
         hydrogen_h2_compound.substances.push_back(hydrogen_h2);
         hydrogen_h2_compound.molar_fractions.push_back(1.0);  // 100% H2
         
-        // Run simulations for H1
-        std::vector<double> h1_energy_history = runSimulations(hydrogen_h1_compound, "H1", NUM_RUNS, MAX_STEPS);
+        // Create initial neutron with exactly 2 MeV energy and random direction
+        Random rng_for_direction(12345);
+        std::vector<double> random_direction = sampleRandomDirection(rng_for_direction);
+        Neutron initial_neutron(2.0e6, random_direction[0], random_direction[1], random_direction[2], false);  // 2 MeV
         
-        // Run simulations for H2
-        std::vector<double> h2_energy_history = runSimulations(hydrogen_h2_compound, "H2", NUM_RUNS, MAX_STEPS);
+        std::cout << "Initial neutron energy: " << initial_neutron.energy << " eV" << std::endl;
+        
+        // Run H1 simulations using physics function
+        std::cout << "Running " << NUM_RUNS << " simulations for H1..." << std::endl;
+        std::vector<double> h1_energy_history = averageEnergyOfSingleNeutron(initial_neutron, hydrogen_h1_compound, NUM_RUNS, MAX_STEPS);
+        
+        // Run H2 simulations using physics function
+        std::cout << "Running " << NUM_RUNS << " simulations for H2..." << std::endl;
+        std::vector<double> h2_energy_history = averageEnergyOfSingleNeutron(initial_neutron, hydrogen_h2_compound, NUM_RUNS, MAX_STEPS);
+        
+        std::cout << "All simulations completed!" << std::endl;
+        std::cout << "H1 average energy history computed with " << h1_energy_history.size() << " steps" << std::endl;
+        std::cout << "H2 average energy history computed with " << h2_energy_history.size() << " steps" << std::endl;
         
         // Output H1 energy history to file
         std::string h1_output_file = "../plot/neutron_slowing_h1.dat";
@@ -143,7 +72,38 @@ int main() {
         
         std::cout << "H2 average energy history saved to: " << h2_output_file << std::endl;
         
-        std::cout << "\nComparison complete! Both datasets saved to plot directory." << std::endl;
+        // Calculate stationary slowing down for H1 and H2
+        std::cout << "\nCalculating stationary slowing down..." << std::endl;
+        
+        // Calculate H1 stationary slowing (use same number of steps as Monte Carlo)
+        std::vector<double> h1_stationary = stationarySlowingDown(2.0e6, h1_data, MAX_STEPS);  // 2 MeV initial energy
+        
+        // Calculate H2 stationary slowing (use same number of steps as Monte Carlo)
+        std::vector<double> h2_stationary = stationarySlowingDown(2.0e6, h2_data, MAX_STEPS);  // 2 MeV initial energy
+        
+        // Output H1 stationary slowing to file (only first and last entries for straight line)
+        std::string h1_stationary_file = "../plot/neutron_slowing_h1_stationary.dat";
+        clearFileIfExists(h1_stationary_file);
+        
+        // Write first entry
+        writeTable(h1_stationary_file, "step", 0, "energy", h1_stationary[0]);
+        // Write last entry
+        writeTable(h1_stationary_file, "step", static_cast<int>(h1_stationary.size()-1), "energy", h1_stationary[h1_stationary.size()-1]);
+        
+        std::cout << "H1 stationary slowing saved to: " << h1_stationary_file << std::endl;
+        
+        // Output H2 stationary slowing to file (only first and last entries for straight line)
+        std::string h2_stationary_file = "../plot/neutron_slowing_h2_stationary.dat";
+        clearFileIfExists(h2_stationary_file);
+        
+        // Write first entry
+        writeTable(h2_stationary_file, "step", 0, "energy", h2_stationary[0]);
+        // Write last entry
+        writeTable(h2_stationary_file, "step", static_cast<int>(h2_stationary.size()-1), "energy", h2_stationary[h2_stationary.size()-1]);
+        
+        std::cout << "H2 stationary slowing saved to: " << h2_stationary_file << std::endl;
+        
+        std::cout << "\nComparison complete! All datasets saved to plot directory." << std::endl;
         
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;

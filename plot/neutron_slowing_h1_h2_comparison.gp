@@ -5,7 +5,7 @@ set terminal png size 1200, 800
 set output 'neutron_slowing_h1_h2_comparison.png'
 
 # Set up the plot
-set title 'Neutron Slowing Down Comparison\nH1 (Protium) vs H2 (Deuterium)' font ",16"
+set title 'Neutron Slowing Down Comparison: H1 (Protium) vs H2 (Deuterium)' font ",16"
 set xlabel 'Collision Number' font ",12"
 set ylabel 'Neutron Energy (MeV)' font ",12"
 
@@ -15,9 +15,9 @@ set logscale y
 # Format y-axis to show proper scientific notation
 set format y "%.2e"
 
-# Set axis ranges - let both axes auto-fit to data
+# Set axis ranges - let x-axis auto-fit to data, limit y-axis
 set autoscale x
-set autoscale y
+set yrange [1e-9:]
 
 # Add grid for better readability
 set grid
@@ -28,7 +28,9 @@ set style line 2 lc rgb "red" lw 2
 
 # Plot both datasets (convert eV to MeV by dividing by 1e6)
 plot 'neutron_slowing_h1.dat' using 1:($2/1e6) with lines linestyle 1 title 'H1 (Protium)', \
-     'neutron_slowing_h2.dat' using 1:($2/1e6) with lines linestyle 2 title 'H2 (Deuterium)'
+     'neutron_slowing_h2.dat' using 1:($2/1e6) with lines linestyle 2 title 'H2 (Deuterium)', \
+     'neutron_slowing_h1_stationary.dat' using 1:($2/1e6) with lines lc rgb "blue" dt (5,5) title 'H1 Stationary Theory', \
+     'neutron_slowing_h2_stationary.dat' using 1:($2/1e6) with lines lc rgb "red" dt (5,5) title 'H2 Stationary Theory'
 
 # Add some reference lines for context (will auto-scale to data range)
 set arrow from graph 0, 2.5e-5 to graph 1, 2.5e-5 nohead linecolor rgb "gray" linetype 2

@@ -5,6 +5,7 @@
 #include "fission.h"
 #include "scattering.h"
 #include <algorithm>
+#include <numeric>
 #include <stdexcept>
 
 // Avogadro's number (atoms/mol)
@@ -376,5 +377,73 @@ MTData getTotalInelasticCrossSection(const NuclearData& nuclear_data) {
     
     // Use sumMTData to calculate total inelastic cross section
     return sumMTData(inelastic_mt_data);
+}
+
+// Function to simulate single neutron energy evolution
+std::vector<double> energyOfSingleNeutron(const Neutron& initial_neutron, const Compound& compound, Random& rng, int max_steps) {
+    std::vector<Neutron> neutrons;
+    neutrons.push_back(initial_neutron);
+    
+    std::vector<double> energy_history;
+    energy_history.push_back(neutrons[0].energy);  // Initial energy
+    
+    int step_count = 0;
+    
+    // Process collisions until the first neutron is captured or max steps reached
+    while (!neutrons[0].captured && step_count < max_steps) {
+        step_count++;
+        
+        // Process neutron collision
+        processNeutronCollision(neutrons, compound, rng);
+        
+        // Record energy of the first neutron
+        energy_history.push_back(neutrons[0].energy);
+    }
+    
+    return energy_history;
+}
+
+// Function to compute average energy evolution over multiple simulations
+std::vector<double> averageEnergyOfSingleNeutron(const Neutron& initial_neutron, const Compound& compound, int num_runs, int max_steps) {
+    std::vector<std::vector<double>> all_energy_histories;
+    std::vector<int> run_step_counts;
+    
+    // Run multiple simulations
+    for (int run = 0; run < num_runs; ++run) {
+        // Create random number generator with different seed for each run
+        Random rng(12345 + run);
+        
+        // Run single neutron simulation
+        std::vector<double> energy_history = energyOfSingleNeutron(initial_neutron, compound, rng, max_steps);
+        
+        // Store this run's data
+        all_energy_histories.push_back(energy_history);
+        run_step_counts.push_back(energy_history.size() - 1);  // Subtract 1 for initial energy
+    }
+    
+    // Find the maximum number of steps across all runs
+    int max_steps_actual = *std::max_element(run_step_counts.begin(), run_step_counts.end());
+    
+    // Compute average energy array
+    std::vector<double> average_energy_history;
+    
+    for (int step = 0; step <= max_steps_actual; ++step) {
+        double energy_sum = 0.0;
+        int valid_runs = 0;
+        
+        // Sum energies from all runs that have data for this step
+        for (size_t run = 0; run < all_energy_histories.size(); ++run) {
+            if (step < static_cast<int>(all_energy_histories[run].size())) {
+                energy_sum += all_energy_histories[run][step];
+                valid_runs++;
+            }
+        }
+        
+        // Compute average energy for this step
+        double average_energy = (valid_runs > 0) ? energy_sum / valid_runs : 0.0;
+        average_energy_history.push_back(average_energy);
+    }
+    
+    return average_energy_history;
 }
 

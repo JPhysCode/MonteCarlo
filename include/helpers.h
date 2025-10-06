@@ -33,4 +33,9 @@ NuclearData NuclearDataAtEnergy(const NuclearData& nuclear_data, double energy);
 // Uses the relationship: E = k_B * T where k_B = 8.617333262e-5 eV/K
 double temperatureToEnergy(double temperature_K);
 
+// Stationary neutron slowing down calculation
+// Takes initial energy, nuclear data, and number of steps, returns array with energy at each step
+// Uses the equations: ΔE/E₀ = (1-α)/2 where α = ((1-A)/(1+A))² and A = M/m
+std::vector<double> stationarySlowingDown(double initial_energy, const NuclearData& nuclear_data, int num_steps = 1);
+
 #endif // HELPERS_H

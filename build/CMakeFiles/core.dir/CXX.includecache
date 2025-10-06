@@ -64,16 +64,6 @@ physics.h
 random_sampling.h
 ../include/random_sampling.h
 
-../include/statistics.h
-vector
--
-cstdint
--
-
-/home/julian/MonteCarloTransport/src/capture.cpp
-capture.h
-/home/julian/MonteCarloTransport/src/capture.h
-
 /home/julian/MonteCarloTransport/src/fission.cpp
 fission.h
 /home/julian/MonteCarloTransport/src/fission.h
@@ -84,6 +74,16 @@ helpers.h
 cmath
 -
 stdexcept
+-
+
+/home/julian/MonteCarloTransport/src/helpers.cpp
+helpers.h
+/home/julian/MonteCarloTransport/src/helpers.h
+stdexcept
+-
+cmath
+-
+vector
 -
 
 /home/julian/MonteCarloTransport/src/physics.cpp
@@ -100,6 +100,8 @@ fission.h
 scattering.h
 /home/julian/MonteCarloTransport/src/scattering.h
 algorithm
+-
+numeric
 -
 stdexcept
 -
@@ -124,19 +126,5 @@ helpers.h
 cmath
 -
 stdexcept
--
-
-/home/julian/MonteCarloTransport/src/statistics.cpp
-statistics.h
-/home/julian/MonteCarloTransport/src/statistics.h
-random_sampling.h
-/home/julian/MonteCarloTransport/src/random_sampling.h
-cmath
--
-algorithm
--
-numeric
--
-limits
 -
 

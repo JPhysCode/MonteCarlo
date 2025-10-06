@@ -174,3 +174,40 @@ double temperatureToEnergy(double temperature_K) {
     
     return k_B * temperature_K;
 }
+
+// Stationary neutron slowing down calculation
+std::vector<double> stationarySlowingDown(double initial_energy, const NuclearData& nuclear_data, int num_steps) {
+    // Constants
+    const double neutron_mass = 939.56542052e6;  // Neutron mass in eV/c²
+    
+    // Calculate target mass from atomic weight
+    double target_mass = nuclear_data.aweight * 931.49410242e6;  // Target mass in eV/c²
+    
+    // Calculate mass ratio A = M/m
+    double A = target_mass / neutron_mass;
+    
+    // Calculate α = ((1-A)/(1+A))²
+    double alpha = ((1.0 - A) / (1.0 + A)) * ((1.0 - A) / (1.0 + A));
+    
+    // Calculate ΔE/E₀ = (1-α)/2
+    double delta_E_over_E0 = (1.0 - alpha) / 2.0;
+    
+    // Initialize result array with initial energy
+    std::vector<double> result;
+    result.push_back(initial_energy);
+    
+    // Calculate energy after each step
+    double current_energy = initial_energy;
+    for (int step = 0; step < num_steps; ++step) {
+        // Calculate energy loss ΔE for this step
+        double delta_E = delta_E_over_E0 * current_energy;
+        
+        // Calculate new energy after collision
+        current_energy = current_energy - delta_E;
+        
+        // Add to result array
+        result.push_back(current_energy);
+    }
+    
+    return result;
+}
