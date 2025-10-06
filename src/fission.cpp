@@ -1,4 +1,5 @@
 #include "fission.h"
+#include "capture.h"
 #include "helpers.h"
 #include <cmath>
 #include <stdexcept>
@@ -6,7 +7,9 @@
 // Implementation of fission cross-sections and calculations
 
 // Generate new neutrons from fission reaction
-std::vector<Neutron> fissionNeutronGeneration(const Neutron& neutron, const NuclearData& nuclear_data, Random& rng) {
+std::vector<Neutron> fission(Neutron& neutron, const NuclearData& nuclear_data, Random& rng) {
+    // Mark the incoming neutron as captured using the capture function
+    neutronCapture(neutron);
     // Get MT0 data (nu_bar - average number of fission neutrons)
     auto mt0_it = nuclear_data.mt_data.find(0);
     if (mt0_it == nuclear_data.mt_data.end()) {

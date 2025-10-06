@@ -1,5 +1,9 @@
 #include "physics.h"
 #include "helpers.h"
+#include "random_sampling.h"
+#include "capture.h"
+#include "fission.h"
+#include "scattering.h"
 #include <algorithm>
 #include <stdexcept>
 
@@ -142,6 +146,64 @@ MTData calculateTotalMacroscopicCrossSection(const Compound& compound) {
     
     // Sum all weighted MT data to get total macroscopic cross section
     return sumMTData(weighted_mt_data);
+}
+
+// Process neutrons through target sampling and reaction sampling
+void processNeutronCollision(std::vector<Neutron>& neutrons, const Compound& compound, Random& rng) {
+    // Find the first neutron that is not captured yet
+    auto neutron_it = std::find_if(neutrons.begin(), neutrons.end(),
+        [](const Neutron& neutron) { return !neutron.captured; });
+    
+    // If no uncaptured neutrons found, return
+    if (neutron_it == neutrons.end()) {
+        return;
+    }
+    
+    // Get reference to the selected neutron
+    Neutron& selected_neutron = *neutron_it;
+    
+    // Perform target sampling to get the target species (already boiled down to neutron's energy)
+    NuclearData target_species = targetSampling(rng, compound, selected_neutron.energy);
+    
+    // Perform reaction sampling to get the reaction type
+    int reaction_mt = reactionSampling(rng, target_species);
+    
+    // Handle the reaction based on MT number
+    switch (reaction_mt) {
+        case 1:
+            // Total cross section - this shouldn't happen in practice
+            // Skip this neutron and try again
+            break;
+            
+        case 2:
+            // Elastic scattering - update the neutron
+            elasticScattering(selected_neutron, target_species, rng);
+            break;
+            
+        case 16:
+        case 18:
+            // Fission - generate new neutrons and append to array
+            {
+                std::vector<Neutron> fission_neutrons = fission(selected_neutron, target_species, rng);
+                neutrons.insert(neutrons.end(), fission_neutrons.begin(), fission_neutrons.end());
+            }
+            break;
+            
+        case 102:
+        case 103:
+        case 104:
+        case 105:
+        case 106:
+        case 107:
+            // Radiative capture - mark neutron as captured
+            neutronCapture(selected_neutron);
+            break;
+            
+        default:
+            // Other reactions - treat as capture for now
+            neutronCapture(selected_neutron);
+            break;
+    }
 }
 
 // Generic function to sum multiple MTData objects

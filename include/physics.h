@@ -60,6 +60,11 @@ MTData calculateSpeciesMacroscopicCrossSection(const NuclearData& species_data, 
 // Returns MTData containing energy-dependent macroscopic cross section (cm⁻¹)
 MTData calculateTotalMacroscopicCrossSection(const Compound& compound);
 
+// Process neutrons through target sampling and reaction sampling
+// Takes array of neutrons and compound, processes first uncaptured neutron
+// Updates neutron array based on reaction type (scattering, capture, fission)
+void processNeutronCollision(std::vector<Neutron>& neutrons, const Compound& compound, Random& rng);
+
 // Generic function to sum multiple MTData objects
 // Finds the MTData with most energy points, uses its energy grid as base
 // Interpolates all other MTData onto this grid and sums them up
