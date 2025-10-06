@@ -110,7 +110,7 @@ NuclearData targetSampling(Random& rng, const Compound& compound, double energy)
 }
 
 // Sample a nuclear reaction (MT channel) for a species
-double reactionSampling(Random& rng, const NuclearData& nuclear_data) {
+int reactionSampling(Random& rng, const NuclearData& nuclear_data) {
     // Validate that nuclear data is boiled down to a single energy point
     for (const auto& mt_pair : nuclear_data.mt_data) {
         const MTData& mt_data = mt_pair.second;
@@ -156,11 +156,8 @@ double reactionSampling(Random& rng, const NuclearData& nuclear_data) {
     // Use interval sampling to select a reaction based on cross section weights
     int selected_index = intervalSampling(rng, cross_sections);
     
-    // Get the Q-value of the selected reaction
-    int selected_mt = mt_numbers[selected_index];
-    const MTData& selected_mt_data = nuclear_data.mt_data.at(selected_mt);
-    
-    return selected_mt_data.qval;
+    // Return the MT number of the selected reaction
+    return mt_numbers[selected_index];
 }
 
 // Sample energy from a Maxwellian distribution

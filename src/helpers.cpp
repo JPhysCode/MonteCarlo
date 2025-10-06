@@ -166,3 +166,11 @@ NuclearData NuclearDataAtEnergy(const NuclearData& nuclear_data, double energy) 
     
     return result_data;
 }
+
+// Convert temperature from Kelvin to energy in eV
+double temperatureToEnergy(double temperature_K) {
+    // Boltzmann constant in eV/K
+    const double k_B = 8.617333262e-5;  // eV/K
+    
+    return k_B * temperature_K;
+}

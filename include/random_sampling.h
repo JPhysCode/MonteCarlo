@@ -27,8 +27,8 @@ NuclearData targetSampling(Random& rng, const Compound& compound, double energy)
 // Sample a nuclear reaction (MT channel) for a species
 // Uses cross section values as weights for reaction selection
 // Input nuclear data must already be boiled down to a single energy point
-// Returns the Q-value of the selected reaction
-double reactionSampling(Random& rng, const NuclearData& nuclear_data);
+// Returns the MT number of the selected reaction
+int reactionSampling(Random& rng, const NuclearData& nuclear_data);
 
 // Sample energy from a Maxwellian distribution
 // T is the nuclear temperature parameter (eV, default: 1.2895 MeV)
