@@ -2,6 +2,7 @@
 #define HELPERS_H
 
 #include "io.h"
+#include "physics.h"
 #include <vector>
 
 // Helper functions for nuclear transport calculations
@@ -37,5 +38,9 @@ double temperatureToEnergy(double temperature_K);
 // Takes initial energy, nuclear data, and number of steps, returns array with energy at each step
 // Uses the equations: ΔE/E₀ = (1-α)/2 where α = ((1-A)/(1+A))² and A = M/m
 std::vector<double> stationarySlowingDown(double initial_energy, const NuclearData& nuclear_data, int num_steps = 1);
+
+// Count the number of active (non-captured) neutrons in a neutron bank
+// Takes a vector of neutrons and returns the count of neutrons where captured == false
+int activeNeutronCount(const std::vector<Neutron>& neutronbank);
 
 #endif // HELPERS_H

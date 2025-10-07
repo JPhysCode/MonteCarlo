@@ -16,6 +16,7 @@ CMakeFiles/core.dir/src/fission.cpp.o: ../src/fission.cpp
 
 CMakeFiles/core.dir/src/helpers.cpp.o: ../include/helpers.h
 CMakeFiles/core.dir/src/helpers.cpp.o: ../include/io.h
+CMakeFiles/core.dir/src/helpers.cpp.o: ../include/physics.h
 CMakeFiles/core.dir/src/helpers.cpp.o: ../src/helpers.cpp
 
 CMakeFiles/core.dir/src/io.cpp.o: ../include/io.h

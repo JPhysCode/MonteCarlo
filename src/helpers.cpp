@@ -211,3 +211,14 @@ std::vector<double> stationarySlowingDown(double initial_energy, const NuclearDa
     
     return result;
 }
+
+// Count the number of active (non-captured) neutrons in a neutron bank
+int activeNeutronCount(const std::vector<Neutron>& neutronbank) {
+    int count = 0;
+    for (const auto& neutron : neutronbank) {
+        if (!neutron.captured) {
+            count++;
+        }
+    }
+    return count;
+}

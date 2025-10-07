@@ -3,3 +3,7 @@
 
 CMakeFiles/nmultiplication.dir/apps/nmultiplication/main.cpp.o
  /home/julian/MonteCarloTransport/apps/nmultiplication/main.cpp
+ /home/julian/MonteCarloTransport/include/helpers.h
+ /home/julian/MonteCarloTransport/include/io.h
+ /home/julian/MonteCarloTransport/include/physics.h
+ /home/julian/MonteCarloTransport/include/random_sampling.h

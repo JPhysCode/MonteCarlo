@@ -17,6 +17,7 @@ CMakeFiles/core.dir/src/fission.cpp.o
 CMakeFiles/core.dir/src/helpers.cpp.o
  ../include/helpers.h
  ../include/io.h
+ ../include/physics.h
  /home/julian/MonteCarloTransport/src/helpers.cpp
 CMakeFiles/core.dir/src/io.cpp.o
  ../include/io.h
