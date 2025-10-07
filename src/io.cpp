@@ -202,6 +202,8 @@ NuclearData readNuclearDataFile(const std::string& filename) {
     }
 
     // Optional NU function under MT=0
+    // NOTE: Input energies are in MeV in the data files; convert to eV for internal consistency
+    const double MEV_TO_EV = 1.0e6;
     if (nnu < 0) nnu = 0;
     if (nnu > 0) {
         MTData mt0;
@@ -215,6 +217,7 @@ NuclearData readNuclearDataFile(const std::string& filename) {
             std::istringstream ec_iss(line);
             EnergyCrossSectionPair p{};
             ec_iss >> p.energy >> p.cross_section;
+            p.energy *= MEV_TO_EV; // convert MeV -> eV
             mt0.efunc.push_back(p);
         }
         data.mt_data[0] = std::move(mt0);
@@ -256,6 +259,7 @@ NuclearData readNuclearDataFile(const std::string& filename) {
             std::istringstream ec_iss(line);
             EnergyCrossSectionPair p{};
             ec_iss >> p.energy >> p.cross_section;
+            p.energy *= MEV_TO_EV; // convert MeV -> eV
             mt_data.efunc.push_back(p);
         }
 

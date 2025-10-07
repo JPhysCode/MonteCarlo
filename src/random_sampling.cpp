@@ -121,7 +121,7 @@ int reactionSampling(Random& rng, const NuclearData& nuclear_data) {
         }
     }
     
-    // Collect cross section values for all MT channels (excluding MT0)
+    // Collect cross section values for all MT channels (excluding MT0 and MT1)
     std::vector<double> cross_sections;
     std::vector<int> mt_numbers;
     
@@ -129,8 +129,8 @@ int reactionSampling(Random& rng, const NuclearData& nuclear_data) {
     for (const auto& mt_pair : nuclear_data.mt_data) {
         int mt_number = mt_pair.first;
         
-        // Skip MT0 (total cross section)
-        if (mt_number == 0) {
+        // Skip MT0 (nu-bar data) and MT1 (total cross section)
+        if (mt_number == 0 || mt_number == 1) {
             continue;
         }
         
