@@ -1,7 +1,7 @@
 # Gnuplot script for H1 vs H2 neutron slowing down comparison
 # Energy vs collision number with log scale on y-axis
 
-set terminal png size 1200, 800
+set terminal png size 2560, 1920
 set output 'neutron_slowing_h1_h2_comparison.png'
 
 # Set up the plot
@@ -26,11 +26,11 @@ set grid
 set style line 1 lc rgb "blue" lw 2
 set style line 2 lc rgb "red" lw 2
 
-# Plot both datasets (convert eV to MeV by dividing by 1e6)
-plot 'neutron_slowing_h1.dat' using 1:($2/1e6) with lines linestyle 1 title 'H1 (Protium)', \
-     'neutron_slowing_h2.dat' using 1:($2/1e6) with lines linestyle 2 title 'H2 (Deuterium)', \
-     'neutron_slowing_h1_stationary.dat' using 1:($2/1e6) with lines lc rgb "blue" dt (5,5) title 'H1 Stationary Theory', \
-     'neutron_slowing_h2_stationary.dat' using 1:($2/1e6) with lines lc rgb "red" dt (5,5) title 'H2 Stationary Theory'
+# Plot both datasets from combined files (convert eV to MeV by dividing by 1e6)
+plot 'nslowing_h1_h2.dat' using 1:($2/1e6) with lines linestyle 1 title 'H1 (Protium)', \
+     'nslowing_h1_h2.dat' using 1:($3/1e6) with lines linestyle 2 title 'H2 (Deuterium)', \
+     'nslowing_h1_h2_reference.dat' using 1:($2/1e6) with lines lc rgb "blue" dt (5,5) title 'H1 Stationary Theory', \
+     'nslowing_h1_h2_reference.dat' using 1:($3/1e6) with lines lc rgb "red" dt (5,5) title 'H2 Stationary Theory'
 
 # Add some reference lines for context (will auto-scale to data range)
 set arrow from graph 0, 2.5e-5 to graph 1, 2.5e-5 nohead linecolor rgb "gray" linetype 2
