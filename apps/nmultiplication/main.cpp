@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <map>
 #include "../../include/io.h"
 #include "../../include/physics.h"
 #include "../../include/random_sampling.h"
@@ -76,41 +77,89 @@ int main() {
     // Case 1: Pure U238 UO2
     std::cout << "Running " << NUM_RUNS << " simulations for pure U238 UO2..." << std::endl;
     double total_neutrons = 0.0;
+    std::map<std::string, std::map<int, int>> target_reaction_count;
     
     for (int run = 0; run < NUM_RUNS; ++run) {
         std::vector<Neutron> neutronbank = {neutron};
-        processNeutronCollision(neutronbank, uo2_compound, rng);
+        auto [target_symbol, reaction_mt] = processNeutronCollisionLog(neutronbank, uo2_compound, rng);
         total_neutrons += activeNeutronCount(neutronbank);
+        
+        // Count target-reaction pairs
+        if (!target_symbol.empty() && reaction_mt != 0) {
+            target_reaction_count[target_symbol][reaction_mt]++;
+        }
     }
     
     double pure_u238_average = total_neutrons / NUM_RUNS;
     std::cout << "Pure U238 UO2 - Average number of neutrons after one collision: " << pure_u238_average << std::endl;
     
+    // Print target-reaction statistics
+    std::cout << "\nTarget-Reaction Statistics:" << std::endl;
+    for (const auto& [target, reactions] : target_reaction_count) {
+        std::cout << "  " << target << ":" << std::endl;
+        for (const auto& [mt, count] : reactions) {
+            double fraction = static_cast<double>(count) / NUM_RUNS;
+            std::cout << "    MT" << mt << ": " << count << " (" << fraction * 100 << "%)" << std::endl;
+        }
+    }
+    
     // Case 2: Natural uranium UO2
     std::cout << "\nRunning " << NUM_RUNS << " simulations for natural uranium UO2..." << std::endl;
     total_neutrons = 0.0;
+    target_reaction_count.clear();
     
     for (int run = 0; run < NUM_RUNS; ++run) {
         std::vector<Neutron> neutronbank = {neutron};
-        processNeutronCollision(neutronbank, natural_uo2_compound, rng);
+        auto [target_symbol, reaction_mt] = processNeutronCollisionLog(neutronbank, natural_uo2_compound, rng);
         total_neutrons += activeNeutronCount(neutronbank);
+        
+        // Count target-reaction pairs
+        if (!target_symbol.empty() && reaction_mt != 0) {
+            target_reaction_count[target_symbol][reaction_mt]++;
+        }
     }
     
     double natural_average = total_neutrons / NUM_RUNS;
     std::cout << "Natural uranium UO2 - Average number of neutrons after one collision: " << natural_average << std::endl;
     
+    // Print target-reaction statistics
+    std::cout << "\nTarget-Reaction Statistics:" << std::endl;
+    for (const auto& [target, reactions] : target_reaction_count) {
+        std::cout << "  " << target << ":" << std::endl;
+        for (const auto& [mt, count] : reactions) {
+            double fraction = static_cast<double>(count) / NUM_RUNS;
+            std::cout << "    MT" << mt << ": " << count << " (" << fraction * 100 << "%)" << std::endl;
+        }
+    }
+    
     // Case 3: Mixed H2O/natural uranium UO2
     std::cout << "\nRunning " << NUM_RUNS << " simulations for mixed H2O/natural uranium UO2..." << std::endl;
     total_neutrons = 0.0;
+    target_reaction_count.clear();
     
     for (int run = 0; run < NUM_RUNS; ++run) {
         std::vector<Neutron> neutronbank = {neutron};
-        processNeutronCollision(neutronbank, mixed_compound, rng);
+        auto [target_symbol, reaction_mt] = processNeutronCollisionLog(neutronbank, mixed_compound, rng);
         total_neutrons += activeNeutronCount(neutronbank);
+        
+        // Count target-reaction pairs
+        if (!target_symbol.empty() && reaction_mt != 0) {
+            target_reaction_count[target_symbol][reaction_mt]++;
+        }
     }
     
     double mixed_average = total_neutrons / NUM_RUNS;
     std::cout << "Mixed H2O/natural uranium UO2 - Average number of neutrons after one collision: " << mixed_average << std::endl;
+    
+    // Print target-reaction statistics
+    std::cout << "\nTarget-Reaction Statistics:" << std::endl;
+    for (const auto& [target, reactions] : target_reaction_count) {
+        std::cout << "  " << target << ":" << std::endl;
+        for (const auto& [mt, count] : reactions) {
+            double fraction = static_cast<double>(count) / NUM_RUNS;
+            std::cout << "    MT" << mt << ": " << count << " (" << fraction * 100 << "%)" << std::endl;
+        }
+    }
     
     return 0;
 }
