@@ -5,6 +5,7 @@
 #include "../../include/physics.h"
 #include "../../include/random_sampling.h"
 #include "../../include/helpers.h"
+#include "../../include/statistics.h"
 
 int main() {
     std::cout << "Neutron Multiplication Application" << std::endl;
@@ -99,7 +100,9 @@ int main() {
         std::cout << "  " << target << ":" << std::endl;
         for (const auto& [mt, count] : reactions) {
             double fraction = static_cast<double>(count) / NUM_RUNS;
-            std::cout << "    MT" << mt << ": " << count << " (" << fraction * 100 << "%)" << std::endl;
+            double relative_error = Statistics::calculateRelativeError(count);
+            std::cout << "    MT" << mt << ": " << count << " (" << fraction * 100 << "%) "
+                      << "rel. error: " << relative_error * 100 << "%" << std::endl;
         }
     }
     
@@ -128,7 +131,9 @@ int main() {
         std::cout << "  " << target << ":" << std::endl;
         for (const auto& [mt, count] : reactions) {
             double fraction = static_cast<double>(count) / NUM_RUNS;
-            std::cout << "    MT" << mt << ": " << count << " (" << fraction * 100 << "%)" << std::endl;
+            double relative_error = Statistics::calculateRelativeError(count);
+            std::cout << "    MT" << mt << ": " << count << " (" << fraction * 100 << "%) "
+                      << "rel. error: " << relative_error * 100 << "%" << std::endl;
         }
     }
     
@@ -157,7 +162,9 @@ int main() {
         std::cout << "  " << target << ":" << std::endl;
         for (const auto& [mt, count] : reactions) {
             double fraction = static_cast<double>(count) / NUM_RUNS;
-            std::cout << "    MT" << mt << ": " << count << " (" << fraction * 100 << "%)" << std::endl;
+            double relative_error = Statistics::calculateRelativeError(count);
+            std::cout << "    MT" << mt << ": " << count << " (" << fraction * 100 << "%) "
+                      << "rel. error: " << relative_error * 100 << "%" << std::endl;
         }
     }
     

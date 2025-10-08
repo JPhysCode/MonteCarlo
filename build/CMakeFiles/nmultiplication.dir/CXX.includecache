@@ -21,6 +21,8 @@ map
 /home/julian/MonteCarloTransport/include/random_sampling.h
 ../../include/helpers.h
 /home/julian/MonteCarloTransport/include/helpers.h
+../../include/statistics.h
+/home/julian/MonteCarloTransport/include/statistics.h
 
 /home/julian/MonteCarloTransport/include/helpers.h
 io.h
@@ -65,4 +67,10 @@ vector
 -
 physics.h
 /home/julian/MonteCarloTransport/include/physics.h
+
+/home/julian/MonteCarloTransport/include/statistics.h
+vector
+-
+cstdint
+-
 

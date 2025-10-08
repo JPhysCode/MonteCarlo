@@ -167,3 +167,24 @@ StatisticalResult Statistics::calculateAll(const std::vector<double>& values, co
     
     return {mean, stdDev, avgRuntime, fom, normalityPValue};
 }
+
+// Calculate standard error on a count using Poisson approximation
+double Statistics::calculateCountError(int count) {
+    if (count < 0) return 0.0;
+    return std::sqrt(static_cast<double>(count));
+}
+
+// Calculate standard error on a fraction using binomial statistics
+double Statistics::calculateFractionError(int count, int total) {
+    if (total <= 0 || count < 0 || count > total) return 0.0;
+    double fraction = static_cast<double>(count) / static_cast<double>(total);
+    // Binomial standard deviation: sqrt(n * p * (1-p)) / n = sqrt(p * (1-p) / n)
+    return std::sqrt(fraction * (1.0 - fraction) / static_cast<double>(total));
+}
+
+// Calculate relative error
+double Statistics::calculateRelativeError(int count) {
+    if (count <= 0) return std::numeric_limits<double>::infinity();
+    double error = calculateCountError(count);
+    return error / static_cast<double>(count);
+}

@@ -32,4 +32,15 @@ public:
     
     // Calculate all statistics
     static StatisticalResult calculateAll(const std::vector<double>& values, const std::vector<double>& runtimes);
+    
+    // Monte Carlo counting statistics
+    // Calculate standard error on a count using Poisson approximation: σ = sqrt(count)
+    static double calculateCountError(int count);
+    
+    // Calculate standard error on a fraction using binomial statistics: σ = sqrt(f*(1-f)/n)
+    // where f = count/total
+    static double calculateFractionError(int count, int total);
+    
+    // Calculate relative error: σ/count
+    static double calculateRelativeError(int count);
 };
