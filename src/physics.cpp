@@ -167,44 +167,114 @@ void processNeutronCollision(std::vector<Neutron>& neutrons, const Compound& com
     NuclearData target_species = targetSampling(rng, compound, selected_neutron.energy);
     
     // Perform reaction sampling to get the reaction type
-    int reaction_mt = reactionSampling(rng, target_species);
+    // Keep sampling until we get a valid reaction
+    int reaction_mt;
+    bool valid_reaction = false;
     
-    // Handle the reaction based on MT number
-    switch (reaction_mt) {
-        case 1:
-            // Total cross section - this shouldn't happen in practice
-            // Skip this neutron and try again
-            break;
-            
-        case 2:
-            // Elastic scattering - update the neutron
-            elasticScattering(selected_neutron, target_species, rng);
-            break;
-            
-        //case 16:
-        case 18:
-            // Fission - generate new neutrons and append to array
-            {
-                std::vector<Neutron> fission_neutrons = fission(selected_neutron, target_species, rng);
-                neutrons.insert(neutrons.end(), fission_neutrons.begin(), fission_neutrons.end());
-            }
-            break;
-            
-        case 102:
-        case 103:
-        case 104:
-        case 105:
-        case 106:
-        case 107:
-            // Radiative capture - mark neutron as captured
-            neutronCapture(selected_neutron);
-            break;
-            
-        default:
-            // Other reactions - treat as capture for now
-            neutronCapture(selected_neutron);
-            break;
+    while (!valid_reaction) {
+        reaction_mt = reactionSampling(rng, target_species);
+        
+        // Handle the reaction based on MT number
+        switch (reaction_mt) {
+            case 2:
+                // Elastic scattering - update the neutron
+                elasticScattering(selected_neutron, target_species, rng);
+                valid_reaction = true;
+                break;
+                
+            //case 16:
+            case 18:
+                // Fission - generate new neutrons and append to array
+                {
+                    std::vector<Neutron> fission_neutrons = fission(selected_neutron, target_species, rng);
+                    neutrons.insert(neutrons.end(), fission_neutrons.begin(), fission_neutrons.end());
+                }
+                valid_reaction = true;
+                break;
+                
+            case 102:
+            case 103:
+            case 104:
+            case 105:
+            case 106:
+            case 107:
+                // Radiative capture - mark neutron as captured
+                neutronCapture(selected_neutron);
+                valid_reaction = true;
+                break;
+                
+            default:
+                // Unknown reaction - resample
+                break;
+        }
     }
+}
+
+// Process neutron collision with logging
+std::pair<std::string, int> processNeutronCollisionLog(std::vector<Neutron>& neutrons, const Compound& compound, Random& rng) {
+    // Find the first neutron that is not captured yet
+    auto neutron_it = std::find_if(neutrons.begin(), neutrons.end(),
+        [](const Neutron& neutron) { return !neutron.captured; });
+    
+    // If no uncaptured neutrons found, return empty result
+    if (neutron_it == neutrons.end()) {
+        return {"", 0};
+    }
+    
+    // Get reference to the selected neutron
+    Neutron& selected_neutron = *neutron_it;
+    
+    // Perform target sampling to get the target species (already boiled down to neutron's energy)
+    NuclearData target_species = targetSampling(rng, compound, selected_neutron.energy);
+    
+    // Store the target symbol for logging
+    std::string target_symbol = target_species.symbol;
+    
+    // Perform reaction sampling to get the reaction type
+    // Keep sampling until we get a valid reaction
+    int reaction_mt;
+    bool valid_reaction = false;
+    
+    while (!valid_reaction) {
+        reaction_mt = reactionSampling(rng, target_species);
+        
+        // Handle the reaction based on MT number
+        switch (reaction_mt) {
+            case 2:
+                // Elastic scattering - update the neutron
+                elasticScattering(selected_neutron, target_species, rng);
+                valid_reaction = true;
+                break;
+                
+            //case 16:
+            case 18:
+                // Fission - generate new neutrons and append to array
+                {
+                    std::vector<Neutron> fission_neutrons = fission(selected_neutron, target_species, rng);
+                    neutrons.insert(neutrons.end(), fission_neutrons.begin(), fission_neutrons.end());
+                }
+                valid_reaction = true;
+                break;
+                
+            case 102:
+            case 103:
+            case 104:
+            case 105:
+            case 106:
+            case 107:
+                // Radiative capture - mark neutron as captured
+                neutronCapture(selected_neutron);
+                valid_reaction = true;
+                break;
+                
+            default:
+                // Unknown reaction - resample
+                break;
+        }
+    }
+    
+    // Return the target symbol and reaction MT number
+    return {target_symbol, reaction_mt};
 }
 
 // Generic function to sum multiple MTData objects

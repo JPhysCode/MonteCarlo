@@ -2,6 +2,7 @@
 #define PHYSICS_H
 
 #include "io.h"
+#include <utility>
 
 // Forward declaration
 class Random;
@@ -67,6 +68,10 @@ MTData calculateTotalMacroscopicCrossSection(const Compound& compound);
 // Takes array of neutrons and compound, processes first uncaptured neutron
 // Updates neutron array based on reaction type (scattering, capture, fission)
 void processNeutronCollision(std::vector<Neutron>& neutrons, const Compound& compound, Random& rng);
+
+// Process neutron collision with logging
+// Returns a pair containing the target symbol and the sampled reaction MT number
+std::pair<std::string, int> processNeutronCollisionLog(std::vector<Neutron>& neutrons, const Compound& compound, Random& rng);
 
 // Function to simulate single neutron energy evolution
 std::vector<double> energyOfSingleNeutron(const Neutron& initial_neutron, const Compound& compound, Random& rng, int max_steps);
