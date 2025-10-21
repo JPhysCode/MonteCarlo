@@ -1,10 +1,13 @@
 #include "statistics.h"
 #include "random_sampling.h"
-#include "reaction_logger.h"
+#include "helpers.h"
+#include "io.h"
 #include <cmath>
 #include <algorithm>
 #include <numeric>
 #include <limits>
+#include <sstream>
+#include <fstream>
 
 // Mean implementation
 double Statistics::calculateMean(const std::vector<double>& values) {
@@ -193,4 +196,62 @@ double Statistics::calculateRelativeError(int count) {
 // Function to compute statistics from logged reactions
 std::map<std::string, std::map<int, int>> Statistics::computeReactionStatistics() {
     return ReactionLogger::getInstance().getReactionStatistics();
+}
+
+// Function to save reaction statistics to a file and print to console
+void Statistics::saveReactionStatistics(const std::string& filename, const std::string& title, int total_events) {
+    std::map<std::string, std::map<int, int>> reaction_stats = computeReactionStatistics();
+    
+    // If total_events is not provided, calculate it from the statistics
+    if (total_events == -1) {
+        total_events = 0;
+        for (const auto& [target, reactions] : reaction_stats) {
+            for (const auto& [mt, count] : reactions) {
+                total_events += count;
+            }
+        }
+    }
+    
+    // Print to console
+    std::cout << "\n" << title << ":" << std::endl;
+    for (const auto& [target, reactions] : reaction_stats) {
+        std::cout << "  " << target << ":" << std::endl;
+        for (const auto& [mt, count] : reactions) {
+            double fraction = (total_events > 0) ? static_cast<double>(count) / total_events : 0.0;
+            double relative_error = calculateRelativeError(count);
+            std::cout << "    MT" << mt << ": " << count << " (" << fraction * 100 << "%) "
+                      << "rel. error: " << relative_error * 100 << "%" << std::endl;
+        }
+    }
+    
+    // Save to file using simple file output
+    std::ofstream out(filename);
+    if (!out) {
+        throw std::runtime_error("Could not open file for writing: " + filename);
+    }
+    
+    // Write header information
+    out << "Title\t" << title << "\n";
+    out << "Total_Events\t" << total_events << "\n";
+    out << "\n"; // Empty line for separation
+    
+    // Write column headers
+    out << "Target\tReaction_MT\tCount\tPercentage\tRelative_Error\n";
+    
+    // Write data rows
+    for (const auto& [target, reactions] : reaction_stats) {
+        for (const auto& [mt, count] : reactions) {
+            double fraction = (total_events > 0) ? static_cast<double>(count) / total_events : 0.0;
+            double relative_error = calculateRelativeError(count);
+            
+            // Convert MT number to string
+            std::stringstream mt_stream;
+            mt_stream << "MT" << mt;
+            
+            out << target << "\t" << mt_stream.str() << "\t" << count << "\t" 
+                << fraction * 100 << "\t" << relative_error * 100 << "\n";
+        }
+    }
+    
+    out.close();
 }

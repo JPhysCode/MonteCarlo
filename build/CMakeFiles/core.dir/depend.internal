@@ -29,7 +29,6 @@ CMakeFiles/core.dir/src/physics.cpp.o
  ../include/io.h
  ../include/physics.h
  ../include/random_sampling.h
- ../include/reaction_logger.h
  ../include/scattering.h
  /home/julian/MonteCarloTransport/src/physics.cpp
 CMakeFiles/core.dir/src/random_sampling.cpp.o
@@ -38,9 +37,6 @@ CMakeFiles/core.dir/src/random_sampling.cpp.o
  ../include/physics.h
  ../include/random_sampling.h
  /home/julian/MonteCarloTransport/src/random_sampling.cpp
-CMakeFiles/core.dir/src/reaction_logger.cpp.o
- ../include/reaction_logger.h
- /home/julian/MonteCarloTransport/src/reaction_logger.cpp
 CMakeFiles/core.dir/src/scattering.cpp.o
  ../include/helpers.h
  ../include/io.h
@@ -49,9 +45,9 @@ CMakeFiles/core.dir/src/scattering.cpp.o
  ../include/scattering.h
  /home/julian/MonteCarloTransport/src/scattering.cpp
 CMakeFiles/core.dir/src/statistics.cpp.o
+ ../include/helpers.h
  ../include/io.h
  ../include/physics.h
  ../include/random_sampling.h
- ../include/reaction_logger.h
  ../include/statistics.h
  /home/julian/MonteCarloTransport/src/statistics.cpp

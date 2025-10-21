@@ -1,0 +1,10 @@
+Title	Natural Uranium UO2 Target-Reaction Statistics
+Total_Events	10000
+
+Target	Reaction_MT	Count	Percentage	Relative_Error
+O-16	MT2	7046	70.46	1.19132
+U-235	MT2	12	0.12	28.8675
+U-235	MT18	8	0.08	35.3553
+U-238	MT2	2847	28.47	1.87416
+U-238	MT18	5	0.05	44.7214
+U-238	MT102	82	0.82	11.0432

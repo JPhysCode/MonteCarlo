@@ -1,0 +1,8 @@
+Title	Pure U238 UO2 Target-Reaction Statistics
+Total_Events	10000
+
+Target	Reaction_MT	Count	Percentage	Relative_Error
+O-16	MT2	6947	69.47	1.19978
+U-238	MT2	2965	29.65	1.83649
+U-238	MT18	7	0.07	37.7964
+U-238	MT102	81	0.81	11.1111

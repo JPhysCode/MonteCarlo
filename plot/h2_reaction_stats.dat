@@ -1,0 +1,6 @@
+Title	H2 Reaction Statistics
+Total_Events	160000
+
+Target	Reaction_MT	Count	Percentage	Relative_Error
+H-2	MT2	159702	99.8137	0.250233
+H-2	MT102	12	0.0075	28.8675

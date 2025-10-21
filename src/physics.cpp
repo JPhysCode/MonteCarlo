@@ -4,7 +4,6 @@
 #include "capture.h"
 #include "fission.h"
 #include "scattering.h"
-#include "reaction_logger.h"
 #include <algorithm>
 #include <numeric>
 #include <stdexcept>
@@ -464,8 +463,8 @@ std::vector<double> energyOfSingleNeutron(const Neutron& initial_neutron, const 
     while (!neutrons[0].captured && step_count < max_steps) {
         step_count++;
         
-        // Process neutron collision
-        processNeutronCollision(neutrons, compound, rng);
+        // Process neutron collision with logging
+        processNeutronCollisionLog(neutrons, compound, rng);
         
         // Record energy of the first neutron
         energy_history.push_back(neutrons[0].energy);

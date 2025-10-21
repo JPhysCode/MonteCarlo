@@ -31,6 +31,10 @@ public:
     // Returns a map of target symbols to maps of reaction MT numbers to counts
     static std::map<std::string, std::map<int, int>> computeReactionStatistics();
     
+    // Function to save reaction statistics to a file and print to console
+    // Takes filename, optional title, and optional total_events parameter for percentage calculation
+    static void saveReactionStatistics(const std::string& filename, const std::string& title = "Reaction Statistics", int total_events = -1);
+    
     // Shapiro–Francia p-value using Royston calibration (valid for 5 <= n <= 5000).
     // If n > 5000, computes p-value on a uniform random subsample of size 5000.
     // If n < 5, returns NaN.

@@ -544,33 +544,6 @@ src/random_sampling.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/core.dir/build.make CMakeFiles/core.dir/src/random_sampling.cpp.s
 .PHONY : src/random_sampling.cpp.s
 
-src/reaction_logger.o: src/reaction_logger.cpp.o
-
-.PHONY : src/reaction_logger.o
-
-# target to build an object file
-src/reaction_logger.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/core.dir/build.make CMakeFiles/core.dir/src/reaction_logger.cpp.o
-.PHONY : src/reaction_logger.cpp.o
-
-src/reaction_logger.i: src/reaction_logger.cpp.i
-
-.PHONY : src/reaction_logger.i
-
-# target to preprocess a source file
-src/reaction_logger.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/core.dir/build.make CMakeFiles/core.dir/src/reaction_logger.cpp.i
-.PHONY : src/reaction_logger.cpp.i
-
-src/reaction_logger.s: src/reaction_logger.cpp.s
-
-.PHONY : src/reaction_logger.s
-
-# target to generate assembly for a file
-src/reaction_logger.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/core.dir/build.make CMakeFiles/core.dir/src/reaction_logger.cpp.s
-.PHONY : src/reaction_logger.cpp.s
-
 src/scattering.o: src/scattering.cpp.o
 
 .PHONY : src/scattering.o
@@ -676,9 +649,6 @@ help:
 	@echo "... src/random_sampling.o"
 	@echo "... src/random_sampling.i"
 	@echo "... src/random_sampling.s"
-	@echo "... src/reaction_logger.o"
-	@echo "... src/reaction_logger.i"
-	@echo "... src/reaction_logger.s"
 	@echo "... src/scattering.o"
 	@echo "... src/scattering.i"
 	@echo "... src/scattering.s"

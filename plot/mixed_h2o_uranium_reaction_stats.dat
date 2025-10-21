@@ -1,0 +1,12 @@
+Title	Mixed H2O/Natural Uranium UO2 Target-Reaction Statistics
+Total_Events	10000
+
+Target	Reaction_MT	Count	Percentage	Relative_Error
+H-1	MT2	2158	21.58	2.15265
+O-16	MT2	6126	61.26	1.27765
+U-235	MT2	7	0.07	37.7964
+U-235	MT18	4	0.04	50
+U-235	MT102	2	0.02	70.7107
+U-238	MT2	1661	16.61	2.45366
+U-238	MT18	4	0.04	50
+U-238	MT102	38	0.38	16.2221

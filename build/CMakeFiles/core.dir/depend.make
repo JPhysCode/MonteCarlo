@@ -28,7 +28,6 @@ CMakeFiles/core.dir/src/physics.cpp.o: ../include/helpers.h
 CMakeFiles/core.dir/src/physics.cpp.o: ../include/io.h
 CMakeFiles/core.dir/src/physics.cpp.o: ../include/physics.h
 CMakeFiles/core.dir/src/physics.cpp.o: ../include/random_sampling.h
-CMakeFiles/core.dir/src/physics.cpp.o: ../include/reaction_logger.h
 CMakeFiles/core.dir/src/physics.cpp.o: ../include/scattering.h
 CMakeFiles/core.dir/src/physics.cpp.o: ../src/physics.cpp
 
@@ -38,9 +37,6 @@ CMakeFiles/core.dir/src/random_sampling.cpp.o: ../include/physics.h
 CMakeFiles/core.dir/src/random_sampling.cpp.o: ../include/random_sampling.h
 CMakeFiles/core.dir/src/random_sampling.cpp.o: ../src/random_sampling.cpp
 
-CMakeFiles/core.dir/src/reaction_logger.cpp.o: ../include/reaction_logger.h
-CMakeFiles/core.dir/src/reaction_logger.cpp.o: ../src/reaction_logger.cpp
-
 CMakeFiles/core.dir/src/scattering.cpp.o: ../include/helpers.h
 CMakeFiles/core.dir/src/scattering.cpp.o: ../include/io.h
 CMakeFiles/core.dir/src/scattering.cpp.o: ../include/physics.h
@@ -48,10 +44,10 @@ CMakeFiles/core.dir/src/scattering.cpp.o: ../include/random_sampling.h
 CMakeFiles/core.dir/src/scattering.cpp.o: ../include/scattering.h
 CMakeFiles/core.dir/src/scattering.cpp.o: ../src/scattering.cpp
 
+CMakeFiles/core.dir/src/statistics.cpp.o: ../include/helpers.h
 CMakeFiles/core.dir/src/statistics.cpp.o: ../include/io.h
 CMakeFiles/core.dir/src/statistics.cpp.o: ../include/physics.h
 CMakeFiles/core.dir/src/statistics.cpp.o: ../include/random_sampling.h
-CMakeFiles/core.dir/src/statistics.cpp.o: ../include/reaction_logger.h
 CMakeFiles/core.dir/src/statistics.cpp.o: ../include/statistics.h
 CMakeFiles/core.dir/src/statistics.cpp.o: ../src/statistics.cpp
 

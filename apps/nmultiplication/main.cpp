@@ -6,7 +6,6 @@
 #include "../../include/random_sampling.h"
 #include "../../include/helpers.h"
 #include "../../include/statistics.h"
-#include "../../include/reaction_logger.h"
 
 int main() {
     std::cout << "Neutron Multiplication Application" << std::endl;
@@ -94,18 +93,8 @@ int main() {
     double pure_u238_average = total_neutrons / NUM_RUNS;
     std::cout << "Pure U238 UO2 - Average number of neutrons after one collision: " << pure_u238_average << std::endl;
     
-    // Get and print reaction statistics from the logger
-    std::map<std::string, std::map<int, int>> target_reaction_count = Statistics::computeReactionStatistics();
-    std::cout << "\nTarget-Reaction Statistics:" << std::endl;
-    for (const auto& [target, reactions] : target_reaction_count) {
-        std::cout << "  " << target << ":" << std::endl;
-        for (const auto& [mt, count] : reactions) {
-            double fraction = static_cast<double>(count) / NUM_RUNS;
-            double relative_error = Statistics::calculateRelativeError(count);
-            std::cout << "    MT" << mt << ": " << count << " (" << fraction * 100 << "%) "
-                      << "rel. error: " << relative_error * 100 << "%" << std::endl;
-        }
-    }
+    // Print and save reaction statistics
+    Statistics::saveReactionStatistics("../plot/pure_u238_reaction_stats.dat", "Pure U238 UO2 Target-Reaction Statistics", NUM_RUNS);
     
     // Case 2: Natural uranium UO2
     std::cout << "\nRunning " << NUM_RUNS << " simulations for natural uranium UO2..." << std::endl;
@@ -124,19 +113,8 @@ int main() {
     double natural_average = total_neutrons / NUM_RUNS;
     std::cout << "Natural uranium UO2 - Average number of neutrons after one collision: " << natural_average << std::endl;
     
-    // Get and print reaction statistics from the logger
-    // Get and print reaction statistics from the logger
-    target_reaction_count = Statistics::computeReactionStatistics();
-    std::cout << "\nTarget-Reaction Statistics:" << std::endl;
-    for (const auto& [target, reactions] : target_reaction_count) {
-        std::cout << "  " << target << ":" << std::endl;
-        for (const auto& [mt, count] : reactions) {
-            double fraction = static_cast<double>(count) / NUM_RUNS;
-            double relative_error = Statistics::calculateRelativeError(count);
-            std::cout << "    MT" << mt << ": " << count << " (" << fraction * 100 << "%) "
-                      << "rel. error: " << relative_error * 100 << "%" << std::endl;
-        }
-    }
+    // Print and save reaction statistics
+    Statistics::saveReactionStatistics("../plot/natural_uranium_reaction_stats.dat", "Natural Uranium UO2 Target-Reaction Statistics", NUM_RUNS);
     
     // Case 3: Mixed H2O/natural uranium UO2
     std::cout << "\nRunning " << NUM_RUNS << " simulations for mixed H2O/natural uranium UO2..." << std::endl;
@@ -155,19 +133,8 @@ int main() {
     double mixed_average = total_neutrons / NUM_RUNS;
     std::cout << "Mixed H2O/natural uranium UO2 - Average number of neutrons after one collision: " << mixed_average << std::endl;
     
-    // Get and print reaction statistics from the logger
-    // Get and print reaction statistics from the logger
-    target_reaction_count = Statistics::computeReactionStatistics();
-    std::cout << "\nTarget-Reaction Statistics:" << std::endl;
-    for (const auto& [target, reactions] : target_reaction_count) {
-        std::cout << "  " << target << ":" << std::endl;
-        for (const auto& [mt, count] : reactions) {
-            double fraction = static_cast<double>(count) / NUM_RUNS;
-            double relative_error = Statistics::calculateRelativeError(count);
-            std::cout << "    MT" << mt << ": " << count << " (" << fraction * 100 << "%) "
-                      << "rel. error: " << relative_error * 100 << "%" << std::endl;
-        }
-    }
+    // Print and save reaction statistics
+    Statistics::saveReactionStatistics("../plot/mixed_h2o_uranium_reaction_stats.dat", "Mixed H2O/Natural Uranium UO2 Target-Reaction Statistics", NUM_RUNS);
     
     return 0;
 }

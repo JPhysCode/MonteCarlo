@@ -5,6 +5,7 @@
 #include "../../include/physics.h"
 #include "../../include/random_sampling.h"
 #include "../../include/helpers.h"
+#include "../../include/statistics.h"
 
 int main() {
     std::cout << "Neutron Slowing Down Application - H1 vs H2 Comparison" << std::endl;
@@ -38,9 +39,24 @@ int main() {
         std::vector<double> random_direction = sampleRandomDirection(rng_for_direction);
         Neutron initial_neutron(2.0e6, random_direction[0], random_direction[1], random_direction[2], false);  // 2 MeV
         
-        // Run H1 and H2 simulations
+        // Enable logging for reaction statistics
+        ReactionLogger::getInstance().enable();
+        
+        // Run H1 simulation with logging
+        std::cout << "Running H1 simulation with logging..." << std::endl;
+        ReactionLogger::getInstance().clear();
         std::vector<double> h1_energy_history = averageEnergyOfSingleNeutron(initial_neutron, hydrogen_h1_compound, NUM_RUNS, MAX_STEPS);
+        
+        // Print and save H1 reaction statistics
+        Statistics::saveReactionStatistics("../plot/h1_reaction_stats.dat", "H1 Reaction Statistics", NUM_RUNS * MAX_STEPS);
+        
+        // Run H2 simulation with logging
+        std::cout << "\nRunning H2 simulation with logging..." << std::endl;
+        ReactionLogger::getInstance().clear();
         std::vector<double> h2_energy_history = averageEnergyOfSingleNeutron(initial_neutron, hydrogen_h2_compound, NUM_RUNS, MAX_STEPS);
+        
+        // Print and save H2 reaction statistics
+        Statistics::saveReactionStatistics("../plot/h2_reaction_stats.dat", "H2 Reaction Statistics", NUM_RUNS * MAX_STEPS);
         
         // Output combined H1 and H2 data to file
         std::string nslowing_output_file = "../plot/nslowing_h1_h2.dat";
