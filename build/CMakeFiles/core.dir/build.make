@@ -180,6 +180,19 @@ CMakeFiles/core.dir/src/scattering.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/core.dir/src/scattering.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/julian/MonteCarloTransport/src/scattering.cpp -o CMakeFiles/core.dir/src/scattering.cpp.s
 
+CMakeFiles/core.dir/src/reaction_logger.cpp.o: CMakeFiles/core.dir/flags.make
+CMakeFiles/core.dir/src/reaction_logger.cpp.o: ../src/reaction_logger.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/julian/MonteCarloTransport/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/core.dir/src/reaction_logger.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/core.dir/src/reaction_logger.cpp.o -c /home/julian/MonteCarloTransport/src/reaction_logger.cpp
+
+CMakeFiles/core.dir/src/reaction_logger.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/core.dir/src/reaction_logger.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/julian/MonteCarloTransport/src/reaction_logger.cpp > CMakeFiles/core.dir/src/reaction_logger.cpp.i
+
+CMakeFiles/core.dir/src/reaction_logger.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/core.dir/src/reaction_logger.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/julian/MonteCarloTransport/src/reaction_logger.cpp -o CMakeFiles/core.dir/src/reaction_logger.cpp.s
+
 # Object files for target core
 core_OBJECTS = \
 "CMakeFiles/core.dir/src/random_sampling.cpp.o" \
@@ -189,7 +202,8 @@ core_OBJECTS = \
 "CMakeFiles/core.dir/src/physics.cpp.o" \
 "CMakeFiles/core.dir/src/capture.cpp.o" \
 "CMakeFiles/core.dir/src/fission.cpp.o" \
-"CMakeFiles/core.dir/src/scattering.cpp.o"
+"CMakeFiles/core.dir/src/scattering.cpp.o" \
+"CMakeFiles/core.dir/src/reaction_logger.cpp.o"
 
 # External object files for target core
 core_EXTERNAL_OBJECTS =
@@ -202,9 +216,10 @@ libcore.a: CMakeFiles/core.dir/src/physics.cpp.o
 libcore.a: CMakeFiles/core.dir/src/capture.cpp.o
 libcore.a: CMakeFiles/core.dir/src/fission.cpp.o
 libcore.a: CMakeFiles/core.dir/src/scattering.cpp.o
+libcore.a: CMakeFiles/core.dir/src/reaction_logger.cpp.o
 libcore.a: CMakeFiles/core.dir/build.make
 libcore.a: CMakeFiles/core.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/julian/MonteCarloTransport/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX static library libcore.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/julian/MonteCarloTransport/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX static library libcore.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/core.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/core.dir/link.txt --verbose=$(VERBOSE)
 

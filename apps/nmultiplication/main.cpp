@@ -6,6 +6,7 @@
 #include "../../include/random_sampling.h"
 #include "../../include/helpers.h"
 #include "../../include/statistics.h"
+#include "../../include/reaction_logger.h"
 
 int main() {
     std::cout << "Neutron Multiplication Application" << std::endl;
@@ -77,24 +78,24 @@ int main() {
     
     // Case 1: Pure U238 UO2
     std::cout << "Running " << NUM_RUNS << " simulations for pure U238 UO2..." << std::endl;
+    
+    // Enable logging and clear any previous events
+    ReactionLogger::getInstance().enable();
+    ReactionLogger::getInstance().clear();
+    
     double total_neutrons = 0.0;
-    std::map<std::string, std::map<int, int>> target_reaction_count;
     
     for (int run = 0; run < NUM_RUNS; ++run) {
         std::vector<Neutron> neutronbank = {neutron};
-        auto [target_symbol, reaction_mt] = processNeutronCollisionLog(neutronbank, uo2_compound, rng);
+        processNeutronCollisionLog(neutronbank, uo2_compound, rng);
         total_neutrons += activeNeutronCount(neutronbank);
-        
-        // Count target-reaction pairs
-        if (!target_symbol.empty() && reaction_mt != 0) {
-            target_reaction_count[target_symbol][reaction_mt]++;
-        }
     }
     
     double pure_u238_average = total_neutrons / NUM_RUNS;
     std::cout << "Pure U238 UO2 - Average number of neutrons after one collision: " << pure_u238_average << std::endl;
     
-    // Print target-reaction statistics
+    // Get and print reaction statistics from the logger
+    std::map<std::string, std::map<int, int>> target_reaction_count = Statistics::computeReactionStatistics();
     std::cout << "\nTarget-Reaction Statistics:" << std::endl;
     for (const auto& [target, reactions] : target_reaction_count) {
         std::cout << "  " << target << ":" << std::endl;
@@ -108,24 +109,24 @@ int main() {
     
     // Case 2: Natural uranium UO2
     std::cout << "\nRunning " << NUM_RUNS << " simulations for natural uranium UO2..." << std::endl;
+    
+    // Clear previous events for this case
+    ReactionLogger::getInstance().clear();
+    
     total_neutrons = 0.0;
-    target_reaction_count.clear();
     
     for (int run = 0; run < NUM_RUNS; ++run) {
         std::vector<Neutron> neutronbank = {neutron};
-        auto [target_symbol, reaction_mt] = processNeutronCollisionLog(neutronbank, natural_uo2_compound, rng);
+        processNeutronCollisionLog(neutronbank, natural_uo2_compound, rng);
         total_neutrons += activeNeutronCount(neutronbank);
-        
-        // Count target-reaction pairs
-        if (!target_symbol.empty() && reaction_mt != 0) {
-            target_reaction_count[target_symbol][reaction_mt]++;
-        }
     }
     
     double natural_average = total_neutrons / NUM_RUNS;
     std::cout << "Natural uranium UO2 - Average number of neutrons after one collision: " << natural_average << std::endl;
     
-    // Print target-reaction statistics
+    // Get and print reaction statistics from the logger
+    // Get and print reaction statistics from the logger
+    target_reaction_count = Statistics::computeReactionStatistics();
     std::cout << "\nTarget-Reaction Statistics:" << std::endl;
     for (const auto& [target, reactions] : target_reaction_count) {
         std::cout << "  " << target << ":" << std::endl;
@@ -139,24 +140,24 @@ int main() {
     
     // Case 3: Mixed H2O/natural uranium UO2
     std::cout << "\nRunning " << NUM_RUNS << " simulations for mixed H2O/natural uranium UO2..." << std::endl;
+    
+    // Clear previous events for this case
+    ReactionLogger::getInstance().clear();
+    
     total_neutrons = 0.0;
-    target_reaction_count.clear();
     
     for (int run = 0; run < NUM_RUNS; ++run) {
         std::vector<Neutron> neutronbank = {neutron};
-        auto [target_symbol, reaction_mt] = processNeutronCollisionLog(neutronbank, mixed_compound, rng);
+        processNeutronCollisionLog(neutronbank, mixed_compound, rng);
         total_neutrons += activeNeutronCount(neutronbank);
-        
-        // Count target-reaction pairs
-        if (!target_symbol.empty() && reaction_mt != 0) {
-            target_reaction_count[target_symbol][reaction_mt]++;
-        }
     }
     
     double mixed_average = total_neutrons / NUM_RUNS;
     std::cout << "Mixed H2O/natural uranium UO2 - Average number of neutrons after one collision: " << mixed_average << std::endl;
     
-    // Print target-reaction statistics
+    // Get and print reaction statistics from the logger
+    // Get and print reaction statistics from the logger
+    target_reaction_count = Statistics::computeReactionStatistics();
     std::cout << "\nTarget-Reaction Statistics:" << std::endl;
     for (const auto& [target, reactions] : target_reaction_count) {
         std::cout << "  " << target << ":" << std::endl;

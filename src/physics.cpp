@@ -4,6 +4,7 @@
 #include "capture.h"
 #include "fission.h"
 #include "scattering.h"
+#include "reaction_logger.h"
 #include <algorithm>
 #include <numeric>
 #include <stdexcept>
@@ -211,14 +212,14 @@ void processNeutronCollision(std::vector<Neutron>& neutrons, const Compound& com
 }
 
 // Process neutron collision with logging
-std::pair<std::string, int> processNeutronCollisionLog(std::vector<Neutron>& neutrons, const Compound& compound, Random& rng) {
+void processNeutronCollisionLog(std::vector<Neutron>& neutrons, const Compound& compound, Random& rng) {
     // Find the first neutron that is not captured yet
     auto neutron_it = std::find_if(neutrons.begin(), neutrons.end(),
         [](const Neutron& neutron) { return !neutron.captured; });
     
-    // If no uncaptured neutrons found, return empty result
+    // If no uncaptured neutrons found, return
     if (neutron_it == neutrons.end()) {
-        return {"", 0};
+        return;
     }
     
     // Get reference to the selected neutron
@@ -273,8 +274,8 @@ std::pair<std::string, int> processNeutronCollisionLog(std::vector<Neutron>& neu
         }
     }
     
-    // Return the target symbol and reaction MT number
-    return {target_symbol, reaction_mt};
+    // Log the collision event to the global logger
+    ReactionLogger::getInstance().logCollision(target_symbol, reaction_mt, selected_neutron.energy);
 }
 
 // Generic function to sum multiple MTData objects

@@ -15,6 +15,7 @@ add_library(core STATIC
     src/capture.cpp
     src/fission.cpp
     src/scattering.cpp
+    src/reaction_logger.cpp
 )
 
 target_include_directories(core PUBLIC include)

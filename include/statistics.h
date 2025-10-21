@@ -1,6 +1,8 @@
 #pragma once
 #include <vector>
 #include <cstdint>
+#include <map>
+#include <string>
 
 // Statistical result structure (for calculateAll method)
 struct StatisticalResult {
@@ -24,6 +26,10 @@ public:
     // Shapiro–Francia normality test.
     // Returns the statistic W' in (0,1]. If the input size n < 5, returns NaN.
     static double shapiroFranciaW(const std::vector<double>& values);
+    
+    // Function to compute statistics from logged reactions
+    // Returns a map of target symbols to maps of reaction MT numbers to counts
+    static std::map<std::string, std::map<int, int>> computeReactionStatistics();
     
     // Shapiro–Francia p-value using Royston calibration (valid for 5 <= n <= 5000).
     // If n > 5000, computes p-value on a uniform random subsample of size 5000.

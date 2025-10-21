@@ -23,6 +23,8 @@ map
 /home/julian/MonteCarloTransport/include/helpers.h
 ../../include/statistics.h
 /home/julian/MonteCarloTransport/include/statistics.h
+../../include/reaction_logger.h
+/home/julian/MonteCarloTransport/include/reaction_logger.h
 
 /home/julian/MonteCarloTransport/include/helpers.h
 io.h
@@ -68,9 +70,21 @@ vector
 physics.h
 /home/julian/MonteCarloTransport/include/physics.h
 
+/home/julian/MonteCarloTransport/include/reaction_logger.h
+vector
+-
+string
+-
+map
+-
+
 /home/julian/MonteCarloTransport/include/statistics.h
 vector
 -
 cstdint
+-
+map
+-
+string
 -
 

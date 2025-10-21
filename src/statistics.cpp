@@ -1,5 +1,6 @@
 #include "statistics.h"
 #include "random_sampling.h"
+#include "reaction_logger.h"
 #include <cmath>
 #include <algorithm>
 #include <numeric>
@@ -187,4 +188,9 @@ double Statistics::calculateRelativeError(int count) {
     if (count <= 0) return std::numeric_limits<double>::infinity();
     double error = calculateCountError(count);
     return error / static_cast<double>(count);
+}
+
+// Function to compute statistics from logged reactions
+std::map<std::string, std::map<int, int>> Statistics::computeReactionStatistics() {
+    return ReactionLogger::getInstance().getReactionStatistics();
 }
