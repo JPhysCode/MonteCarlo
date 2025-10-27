@@ -94,7 +94,7 @@ int main() {
     std::cout << "Pure U238 UO2 - Average number of neutrons after one collision: " << pure_u238_average << std::endl;
     
     // Print and save reaction statistics
-    Statistics::saveReactionStatistics("../plot/pure_u238_reaction_stats.dat", "Pure U238 UO2 Target-Reaction Statistics", NUM_RUNS);
+    Statistics::saveReactionStatistics("../apps/nmultiplication/pure_u238_reaction_stats.stat", "Pure U238 UO2 Target-Reaction Statistics", NUM_RUNS);
     
     // Case 2: Natural uranium UO2
     std::cout << "\nRunning " << NUM_RUNS << " simulations for natural uranium UO2..." << std::endl;
@@ -114,7 +114,7 @@ int main() {
     std::cout << "Natural uranium UO2 - Average number of neutrons after one collision: " << natural_average << std::endl;
     
     // Print and save reaction statistics
-    Statistics::saveReactionStatistics("../plot/natural_uranium_reaction_stats.dat", "Natural Uranium UO2 Target-Reaction Statistics", NUM_RUNS);
+    Statistics::saveReactionStatistics("../apps/nmultiplication/natural_uranium_reaction_stats.stat", "Natural Uranium UO2 Target-Reaction Statistics", NUM_RUNS);
     
     // Case 3: Mixed H2O/natural uranium UO2
     std::cout << "\nRunning " << NUM_RUNS << " simulations for mixed H2O/natural uranium UO2..." << std::endl;
@@ -134,7 +134,7 @@ int main() {
     std::cout << "Mixed H2O/natural uranium UO2 - Average number of neutrons after one collision: " << mixed_average << std::endl;
     
     // Print and save reaction statistics
-    Statistics::saveReactionStatistics("../plot/mixed_h2o_uranium_reaction_stats.dat", "Mixed H2O/Natural Uranium UO2 Target-Reaction Statistics", NUM_RUNS);
+    Statistics::saveReactionStatistics("../apps/nmultiplication/mixed_h2o_uranium_reaction_stats.stat", "Mixed H2O/Natural Uranium UO2 Target-Reaction Statistics", NUM_RUNS);
     
     return 0;
 }

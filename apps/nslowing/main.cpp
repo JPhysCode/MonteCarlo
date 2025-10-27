@@ -48,7 +48,7 @@ int main() {
         std::vector<double> h1_energy_history = averageEnergyOfSingleNeutron(initial_neutron, hydrogen_h1_compound, NUM_RUNS, MAX_STEPS);
         
         // Print and save H1 reaction statistics
-        Statistics::saveReactionStatistics("../plot/h1_reaction_stats.dat", "H1 Reaction Statistics", NUM_RUNS * MAX_STEPS);
+        Statistics::saveReactionStatistics("../apps/nslowing/h1_reaction_stats.stat", "H1 Reaction Statistics", NUM_RUNS * MAX_STEPS);
         
         // Run H2 simulation with logging
         std::cout << "\nRunning H2 simulation with logging..." << std::endl;
@@ -56,7 +56,7 @@ int main() {
         std::vector<double> h2_energy_history = averageEnergyOfSingleNeutron(initial_neutron, hydrogen_h2_compound, NUM_RUNS, MAX_STEPS);
         
         // Print and save H2 reaction statistics
-        Statistics::saveReactionStatistics("../plot/h2_reaction_stats.dat", "H2 Reaction Statistics", NUM_RUNS * MAX_STEPS);
+        Statistics::saveReactionStatistics("../apps/nslowing/h2_reaction_stats.stat", "H2 Reaction Statistics", NUM_RUNS * MAX_STEPS);
         
         // Output combined H1 and H2 data to file
         std::string nslowing_output_file = "../plot/nslowing_h1_h2.dat";
